@@ -1,0 +1,150 @@
+{% load static %}
+{% load sidebar_tag %}
+<!-- ##### Header Area Start ##### -->
+    <style>
+        #logo {
+            font-family: Impact, Charcoal, sans-serif;
+            font-size: 40px;
+            letter-spacing: 2px;
+            word-spacing: 2px;
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+            font-style: italic;
+            font-variant: normal;
+            text-transform: none;
+        }
+
+        #logo1 {
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            font-size: 22px;
+            letter-spacing: 0px;
+            word-spacing: 2.8px;
+            color: #f8f8f8;
+            font-weight: 700;
+            text-decoration: none;
+            font-style: italic;
+            font-variant: normal;
+            text-transform: none;
+        }
+    </style>
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="top-header-content d-flex align-items-center justify-content-between">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <div id="logo">Pagar Nusa </div>
+                                <div id="logo1">Banyuwangi</div>
+                                <!-- <a href="{% url 'index' %}"><img src="{% static 'img/core-img/logo.png'%}" alt=""></a> -->
+                            </div>
+
+                            <!-- Login Search Area -->
+                            <div class="login-search-area d-flex align-items-center">
+                                <!-- Login -->
+                                <div class="login d-flex">
+                                    <a href="/login">Login</a>
+                                </div>
+                                <!-- Search Form -->
+                                <div class="search-form">
+                                    <form action="{% url 'search' %}" method="get">
+                                        <input type="search" name="search" class="form-control" placeholder="Search">
+                                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="newspaper-main-menu" id="stickyMenu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="newspaperNav">
+
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'img/core-img/logo.png'%}" alt=""></a>
+                        </div>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li class="active"><a href="{% url 'index' %}">HOME</a></li>
+                                    <li><a href="#">Gallery</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'index-galery' %}">IMAGE</a></li>
+                                            <li><a href="{% url 'video-galery' %}">VIDEO</a></li>
+                                        </ul>
+                                    </li>   
+                                    <li><a href="{% url 'index-jadwal' %}">JADWAL</a></li>
+                                    <li><a href="#">DATABASE PENGURUS</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'data-anggota' status='anggota' %}">ANGGOTA</a></li>
+                                            <li><a href="{% url 'data-anggota' status='pengurus' %}">PENGURUS</a></li>
+                                        </ul>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Hero Area Start ##### -->
+    <div class="hero-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-8">
+                    <!-- Breaking News Widget -->
+                    <div class="breaking-news-area d-flex align-items-center">
+                        <div class="news-title">
+                            <p>Breaking News</p>
+                        </div>
+                        <div id="breakingNewsTicker" class="ticker">
+                            <ul>
+                                {% all_news as news %}
+                                {% for data  in news  %}
+                                    <li><a href="{% url 'detail' slug=data.slug %}">{{data.title}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hero Add -->
+                <div class="col-12 col-lg-4">
+                    <div class="hero-add">
+                        <a href="#"><img src="{% static 'img/bg-img/hero-add.gif'%}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ##### Hero Area End ##### -->

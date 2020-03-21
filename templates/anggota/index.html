@@ -1,0 +1,91 @@
+
+
+{% extends 'layouts/main.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/datatables.css' %}">
+    <style>
+        .anggota {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .anggota td, .anggota th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .anggota tr:nth-child(even){background-color: #f2f2f2;}
+
+        .anggota tr:hover {background-color: #ddd;}
+
+        .anggota th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #2d5f0b;
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<div class="featured-post-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-8">
+                <div class="row">
+
+                    <!-- Single Featured Post -->
+                    <div class="col-12 col-lg-12">
+                         <div class="box">
+                            <div class="box-header">
+                            </div>
+                            <div class="box-body">
+                                <table id="example1" class="table table-bordered table-striped anggota">
+                                    <thead>
+                                    <tr>
+                                        <th>Nama </th>
+                                        <th>Alamat</th>
+                                        <th>No Hp</th>
+                                        <th>Jabatan</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for data in anggota %}
+                                    <tr>
+                                        <td>{{data.nama}}</td>
+                                        <td>{{data.alamat}}</td>
+                                        <td>{{data.no_hp}}</td>
+                                        <td>{{data.jabatan}}</td>
+                                    </tr>    
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>                        
+                </div>
+            </div>
+            {% include 'layouts/sidebar-news.html' %}
+        </div>
+    </div>
+</div><br>
+
+
+{% endblock  %}
+
+{% block js %}
+<script src="{% static 'js/datatables.js' %}" ></script>
+<script>
+    $(document).ready(function(){
+        var table = $("#example1").DataTable({
+            responsive: true
+        });
+        new $.fn.dataTable.FixedHeader( table );
+    });
+</script>
+{% endblock  %}
+    
+    
