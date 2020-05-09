@@ -29,8 +29,9 @@ CREATE TABLE `anggota_anggota` (
   `no_hp` varchar(100) NOT NULL,
   `jabatan` varchar(100) NOT NULL,
   `status` varchar(40) NOT NULL,
+  `profile_pic` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +40,7 @@ CREATE TABLE `anggota_anggota` (
 
 LOCK TABLES `anggota_anggota` WRITE;
 /*!40000 ALTER TABLE `anggota_anggota` DISABLE KEYS */;
-INSERT INTO `anggota_anggota` VALUES (1,'Diah','Muncar','081238912839','Bendahara','pengurus'),(2,'Anton','Mbrayu','098762378','~','anggota'),(3,'Lukman','banyuwangi','0812345738','~','anggota'),(4,'Mita','songgon','0817239849','Sekertaris','pengurus'),(5,'Komarun','Sumatra','08712308238','Keamanan','pengurus');
+INSERT INTO `anggota_anggota` VALUES (1,'Diah','Muncar','081238912839','Bendahara','pengurus','profile_pic/profile_pic_6Wg4kZ2.jpeg'),(2,'Anton','Mbrayu','098762378','~','anggota','profile_pic/profile_pic_DhZocSt.jpeg'),(3,'Lukman','banyuwangi','0812345738','~','anggota','profile_pic/profile_pic_2ooEzWF.jpeg'),(4,'Mita','songgon','0817239849','Sekertaris','pengurus','profile_pic/profile_pic_cHCnkk5.jpeg'),(5,'Komarun','Sumatra','08712308238','Keamanan','pengurus','profile_pic/IMG_9740.jpg');
 /*!40000 ALTER TABLE `anggota_anggota` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +56,7 @@ CREATE TABLE `auth_group` (
   `name` varchar(80) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +84,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +111,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +135,7 @@ CREATE TABLE `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(128) NOT NULL,
   `last_login` datetime(6) DEFAULT NULL,
-  `is_superuser` tinyint(1) NOT NULL,
+  `is_superuser` tinyint(1) NOT NULL DEFAULT 1,
   `username` varchar(150) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(150) NOT NULL,
@@ -144,7 +145,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +154,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$120000$0hSfAZ7DcJJv$/u5+C0Ni4juLGRdL6Y8sptih4J/fgd1Oy6akxHxZ88I=','2020-03-21 12:55:06.678767',1,'admin','','','admin@gmail.com',1,1,'2020-03-14 03:05:21.450382');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$120000$0hSfAZ7DcJJv$/u5+C0Ni4juLGRdL6Y8sptih4J/fgd1Oy6akxHxZ88I=','2020-03-29 07:12:38.170457',1,'admin','','','admin@gmail.com',1,1,'2020-03-14 03:05:21.450382');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +174,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,7 +202,7 @@ CREATE TABLE `auth_user_user_permissions` (
   KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +233,7 @@ CREATE TABLE `berita_berita` (
   KEY `berita_berita_penulis_id_ff27028e_fk_auth_user_id` (`penulis_id`),
   KEY `berita_berita_slug_a37f1c05` (`slug`),
   CONSTRAINT `berita_berita_penulis_id_ff27028e_fk_auth_user_id` FOREIGN KEY (`penulis_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,7 +262,7 @@ CREATE TABLE `berita_berita_kategori` (
   KEY `berita_berita_katego_kategory_id_87b25ade_fk_berita_ka` (`kategory_id`),
   CONSTRAINT `berita_berita_katego_kategory_id_87b25ade_fk_berita_ka` FOREIGN KEY (`kategory_id`) REFERENCES `berita_kategory` (`id`),
   CONSTRAINT `berita_berita_kategori_berita_id_f5941ad6_fk_berita_berita_id` FOREIGN KEY (`berita_id`) REFERENCES `berita_berita` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,7 +286,7 @@ CREATE TABLE `berita_kategory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +320,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,7 +329,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2020-03-14 03:19:03.826660','1','Kategory object (1)',1,'[{\"added\": {}}]',8,1),(2,'2020-03-14 03:19:35.923174','2','Kategory object (2)',1,'[{\"added\": {}}]',8,1),(3,'2020-03-14 03:24:10.058951','1','Lorem Ipsum',1,'[{\"added\": {}}]',7,1),(4,'2020-03-14 03:30:10.544393','1','Lorem Ipsum',2,'[]',7,1),(5,'2020-03-14 03:51:17.720037','1','Lorem Ipsum',2,'[]',7,1),(6,'2020-03-14 04:30:34.171894','2','Lorem Ipsum',1,'[{\"added\": {}}]',7,1),(7,'2020-03-14 04:32:52.526008','2','Lorem Ipsum',2,'[{\"changed\": {\"fields\": [\"body\"]}}]',7,1),(8,'2020-03-14 08:10:36.659955','3','The standard Lorem Ipsum passage, used since the 1500s',1,'[{\"added\": {}}]',7,1),(9,'2020-03-14 10:12:24.050714','4','Lorem Ipsum',1,'[{\"added\": {}}]',7,1),(10,'2020-03-14 10:12:55.901051','5','Lorem ipsum',1,'[{\"added\": {}}]',7,1),(11,'2020-03-14 10:14:06.133237','6','lorem ipsum',1,'[{\"added\": {}}]',7,1),(12,'2020-03-14 10:14:47.544621','7','Lorem Ipsum',1,'[{\"added\": {}}]',7,1),(13,'2020-03-14 10:23:11.845374','6','lorem ipsums',2,'[{\"changed\": {\"fields\": [\"title\"]}}]',7,1),(14,'2020-03-14 10:24:58.023107','5','Lorem ipsum',2,'[]',7,1),(15,'2020-03-14 10:25:03.193888','5','Lorem ipsum',2,'[]',7,1),(16,'2020-03-14 10:25:10.229132','3','The standard Lorem Ipsum passage, used since the 1500s',2,'[]',7,1),(17,'2020-03-14 10:25:21.549513','5','Lorem ipsum',2,'[]',7,1),(18,'2020-03-14 10:25:53.975622','7','Lorem Ipsums',2,'[{\"changed\": {\"fields\": [\"title\"]}}]',7,1),(19,'2020-03-14 10:26:22.113086','5','Lorem ipsum',2,'[]',7,1),(20,'2020-03-14 10:26:29.156376','4','Lorem Ipsum',2,'[]',7,1),(21,'2020-03-14 23:29:07.271210','1','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(22,'2020-03-14 23:29:21.967665','2','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(23,'2020-03-14 23:29:37.945587','3','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(24,'2020-03-14 23:29:48.428116','4','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(25,'2020-03-14 23:29:59.297578','5','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(26,'2020-03-14 23:30:10.001008','6','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(27,'2020-03-14 23:30:22.646840','7','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(28,'2020-03-14 23:30:35.481941','8','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(29,'2020-03-15 03:31:05.083422','1','Best Perform PAGAR NUSA Spesial Hari Santri Nasional',1,'[{\"added\": {}}]',10,1),(30,'2020-03-15 03:34:25.215373','2','Keber Saman pagar Nusa ranting sumberberas',1,'[{\"added\": {}}]',10,1),(31,'2020-03-15 03:35:31.154597','3','Pagar Nusa Minhajut Thullab - BC 313 Banyuwangi, in Actions',1,'[{\"added\": {}}]',10,1),(32,'2020-03-15 03:36:24.835299','4','ganda Pencak SIlat Pagar Nusa Minhajut thullab Banyuwangi',1,'[{\"added\": {}}]',10,1),(33,'2020-03-15 03:37:48.584493','5','Ngweri 😱 Atraksi Berb4haya Black Cobra Pagar Nusa',1,'[{\"added\": {}}]',10,1),(34,'2020-03-15 03:38:45.844063','6','zaki pagar nusa minhajut thullab banyuwangi, pengalaman pertama',1,'[{\"added\": {}}]',10,1),(35,'2020-03-15 03:39:16.081177','7','Farizz PN Minhajut Thullab SMK minhajut Thullab Banyuwangi',1,'[{\"added\": {}}]',10,1),(36,'2020-03-15 03:39:48.808940','8','Pengalaman Farizz Yg Berharga',1,'[{\"added\": {}}]',10,1),(37,'2020-03-15 04:39:32.987272','1','Tanding bola',1,'[{\"added\": {}}]',11,1),(38,'2020-03-15 06:01:23.203419','2','Latihan',1,'[{\"added\": {}}]',11,1),(39,'2020-03-15 06:01:48.398949','3','Separigan',1,'[{\"added\": {}}]',11,1),(40,'2020-03-15 06:02:19.309671','4','sabong',1,'[{\"added\": {}}]',11,1),(41,'2020-03-15 06:02:40.500373','5','gladi resik',1,'[{\"added\": {}}]',11,1),(42,'2020-03-15 06:02:58.198981','6','Persiapan Kejurnas',1,'[{\"added\": {}}]',11,1),(43,'2020-03-15 11:37:15.219770','6','Persiapan Kejurnas',2,'[{\"changed\": {\"fields\": [\"start\"]}}]',11,1),(44,'2020-03-15 11:37:19.780096','5','gladi resik',2,'[{\"changed\": {\"fields\": [\"start\"]}}]',11,1),(45,'2020-03-15 11:37:23.918861','4','sabong',2,'[{\"changed\": {\"fields\": [\"start\"]}}]',11,1),(46,'2020-03-15 11:37:30.194198','4','sabong',2,'[]',11,1),(47,'2020-03-15 11:37:34.207615','3','Separigan',2,'[{\"changed\": {\"fields\": [\"start\"]}}]',11,1),(48,'2020-03-15 12:41:21.985958','1','Diah',1,'[{\"added\": {}}]',12,1),(49,'2020-03-15 12:45:29.891844','2','Anton',1,'[{\"added\": {}}]',12,1),(50,'2020-03-15 12:45:43.172369','2','Anton',2,'[]',12,1),(51,'2020-03-15 12:45:56.856338','1','Diah',2,'[]',12,1),(52,'2020-03-15 12:46:03.351654','1','Diah',2,'[]',12,1),(53,'2020-03-15 12:46:15.428430','2','Anton',2,'[]',12,1),(54,'2020-03-15 12:48:02.773802','2','Anton',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(55,'2020-03-15 12:48:13.504040','1','Diah',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(56,'2020-03-15 12:48:40.353937','3','Lukman',1,'[{\"added\": {}}]',12,1),(57,'2020-03-15 12:49:23.491046','4','Mita',1,'[{\"added\": {}}]',12,1),(58,'2020-03-15 12:49:51.479148','5','Komarun',1,'[{\"added\": {}}]',12,1),(59,'2020-03-15 12:50:02.980927','2','Anton',2,'[{\"changed\": {\"fields\": [\"jabatan\"]}}]',12,1),(60,'2020-03-15 13:27:37.586721','5','Komarun',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(61,'2020-03-15 13:27:43.980509','4','Mita',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(62,'2020-03-15 13:27:51.770089','3','Lukman',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(63,'2020-03-15 13:27:58.674388','2','Anton',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(64,'2020-03-15 13:28:04.964394','1','Diah',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(65,'2020-03-15 13:28:11.405243','5','Komarun',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(66,'2020-03-15 13:28:18.962227','4','Mita',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(67,'2020-03-15 13:28:26.385938','1','Diah',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1);
+INSERT INTO `django_admin_log` VALUES (1,'2020-03-14 03:19:03.826660','1','Kategory object (1)',1,'[{\"added\": {}}]',8,1),(2,'2020-03-14 03:19:35.923174','2','Kategory object (2)',1,'[{\"added\": {}}]',8,1),(3,'2020-03-14 03:24:10.058951','1','Lorem Ipsum',1,'[{\"added\": {}}]',7,1),(4,'2020-03-14 03:30:10.544393','1','Lorem Ipsum',2,'[]',7,1),(5,'2020-03-14 03:51:17.720037','1','Lorem Ipsum',2,'[]',7,1),(6,'2020-03-14 04:30:34.171894','2','Lorem Ipsum',1,'[{\"added\": {}}]',7,1),(7,'2020-03-14 04:32:52.526008','2','Lorem Ipsum',2,'[{\"changed\": {\"fields\": [\"body\"]}}]',7,1),(8,'2020-03-14 08:10:36.659955','3','The standard Lorem Ipsum passage, used since the 1500s',1,'[{\"added\": {}}]',7,1),(9,'2020-03-14 10:12:24.050714','4','Lorem Ipsum',1,'[{\"added\": {}}]',7,1),(10,'2020-03-14 10:12:55.901051','5','Lorem ipsum',1,'[{\"added\": {}}]',7,1),(11,'2020-03-14 10:14:06.133237','6','lorem ipsum',1,'[{\"added\": {}}]',7,1),(12,'2020-03-14 10:14:47.544621','7','Lorem Ipsum',1,'[{\"added\": {}}]',7,1),(13,'2020-03-14 10:23:11.845374','6','lorem ipsums',2,'[{\"changed\": {\"fields\": [\"title\"]}}]',7,1),(14,'2020-03-14 10:24:58.023107','5','Lorem ipsum',2,'[]',7,1),(15,'2020-03-14 10:25:03.193888','5','Lorem ipsum',2,'[]',7,1),(16,'2020-03-14 10:25:10.229132','3','The standard Lorem Ipsum passage, used since the 1500s',2,'[]',7,1),(17,'2020-03-14 10:25:21.549513','5','Lorem ipsum',2,'[]',7,1),(18,'2020-03-14 10:25:53.975622','7','Lorem Ipsums',2,'[{\"changed\": {\"fields\": [\"title\"]}}]',7,1),(19,'2020-03-14 10:26:22.113086','5','Lorem ipsum',2,'[]',7,1),(20,'2020-03-14 10:26:29.156376','4','Lorem Ipsum',2,'[]',7,1),(21,'2020-03-14 23:29:07.271210','1','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(22,'2020-03-14 23:29:21.967665','2','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(23,'2020-03-14 23:29:37.945587','3','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(24,'2020-03-14 23:29:48.428116','4','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(25,'2020-03-14 23:29:59.297578','5','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(26,'2020-03-14 23:30:10.001008','6','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(27,'2020-03-14 23:30:22.646840','7','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(28,'2020-03-14 23:30:35.481941','8','Lorem Ipsum',1,'[{\"added\": {}}]',9,1),(29,'2020-03-15 03:31:05.083422','1','Best Perform PAGAR NUSA Spesial Hari Santri Nasional',1,'[{\"added\": {}}]',10,1),(30,'2020-03-15 03:34:25.215373','2','Keber Saman pagar Nusa ranting sumberberas',1,'[{\"added\": {}}]',10,1),(31,'2020-03-15 03:35:31.154597','3','Pagar Nusa Minhajut Thullab - BC 313 Banyuwangi, in Actions',1,'[{\"added\": {}}]',10,1),(32,'2020-03-15 03:36:24.835299','4','ganda Pencak SIlat Pagar Nusa Minhajut thullab Banyuwangi',1,'[{\"added\": {}}]',10,1),(33,'2020-03-15 03:37:48.584493','5','Ngweri 😱 Atraksi Berb4haya Black Cobra Pagar Nusa',1,'[{\"added\": {}}]',10,1),(34,'2020-03-15 03:38:45.844063','6','zaki pagar nusa minhajut thullab banyuwangi, pengalaman pertama',1,'[{\"added\": {}}]',10,1),(35,'2020-03-15 03:39:16.081177','7','Farizz PN Minhajut Thullab SMK minhajut Thullab Banyuwangi',1,'[{\"added\": {}}]',10,1),(36,'2020-03-15 03:39:48.808940','8','Pengalaman Farizz Yg Berharga',1,'[{\"added\": {}}]',10,1),(37,'2020-03-15 04:39:32.987272','1','Tanding bola',1,'[{\"added\": {}}]',11,1),(38,'2020-03-15 06:01:23.203419','2','Latihan',1,'[{\"added\": {}}]',11,1),(39,'2020-03-15 06:01:48.398949','3','Separigan',1,'[{\"added\": {}}]',11,1),(40,'2020-03-15 06:02:19.309671','4','sabong',1,'[{\"added\": {}}]',11,1),(41,'2020-03-15 06:02:40.500373','5','gladi resik',1,'[{\"added\": {}}]',11,1),(42,'2020-03-15 06:02:58.198981','6','Persiapan Kejurnas',1,'[{\"added\": {}}]',11,1),(43,'2020-03-15 11:37:15.219770','6','Persiapan Kejurnas',2,'[{\"changed\": {\"fields\": [\"start\"]}}]',11,1),(44,'2020-03-15 11:37:19.780096','5','gladi resik',2,'[{\"changed\": {\"fields\": [\"start\"]}}]',11,1),(45,'2020-03-15 11:37:23.918861','4','sabong',2,'[{\"changed\": {\"fields\": [\"start\"]}}]',11,1),(46,'2020-03-15 11:37:30.194198','4','sabong',2,'[]',11,1),(47,'2020-03-15 11:37:34.207615','3','Separigan',2,'[{\"changed\": {\"fields\": [\"start\"]}}]',11,1),(48,'2020-03-15 12:41:21.985958','1','Diah',1,'[{\"added\": {}}]',12,1),(49,'2020-03-15 12:45:29.891844','2','Anton',1,'[{\"added\": {}}]',12,1),(50,'2020-03-15 12:45:43.172369','2','Anton',2,'[]',12,1),(51,'2020-03-15 12:45:56.856338','1','Diah',2,'[]',12,1),(52,'2020-03-15 12:46:03.351654','1','Diah',2,'[]',12,1),(53,'2020-03-15 12:46:15.428430','2','Anton',2,'[]',12,1),(54,'2020-03-15 12:48:02.773802','2','Anton',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(55,'2020-03-15 12:48:13.504040','1','Diah',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(56,'2020-03-15 12:48:40.353937','3','Lukman',1,'[{\"added\": {}}]',12,1),(57,'2020-03-15 12:49:23.491046','4','Mita',1,'[{\"added\": {}}]',12,1),(58,'2020-03-15 12:49:51.479148','5','Komarun',1,'[{\"added\": {}}]',12,1),(59,'2020-03-15 12:50:02.980927','2','Anton',2,'[{\"changed\": {\"fields\": [\"jabatan\"]}}]',12,1),(60,'2020-03-15 13:27:37.586721','5','Komarun',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(61,'2020-03-15 13:27:43.980509','4','Mita',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(62,'2020-03-15 13:27:51.770089','3','Lukman',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(63,'2020-03-15 13:27:58.674388','2','Anton',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(64,'2020-03-15 13:28:04.964394','1','Diah',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(65,'2020-03-15 13:28:11.405243','5','Komarun',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(66,'2020-03-15 13:28:18.962227','4','Mita',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(67,'2020-03-15 13:28:26.385938','1','Diah',2,'[{\"changed\": {\"fields\": [\"status\"]}}]',12,1),(68,'2020-03-29 07:09:49.901658','2','keselyoleren',1,'[{\"added\": {}}]',4,1),(69,'2020-03-29 07:10:47.212971','2','keselyoleren',2,'[{\"changed\": {\"fields\": [\"is_staff\"]}}]',4,1),(70,'2020-03-29 07:27:45.633148','2','keselyoleren',3,'',4,1),(71,'2020-03-29 07:31:33.457560','5','Komarun',2,'[{\"changed\": {\"fields\": [\"profile_pic\"]}}]',12,1),(72,'2020-03-29 07:33:28.411942','4','Mita',2,'[]',12,1),(73,'2020-03-29 07:33:37.873833','4','Mita',2,'[{\"changed\": {\"fields\": [\"profile_pic\"]}}]',12,1),(74,'2020-03-29 07:33:47.368371','3','Lukman',2,'[{\"changed\": {\"fields\": [\"profile_pic\"]}}]',12,1),(75,'2020-03-29 07:33:57.833675','2','Anton',2,'[{\"changed\": {\"fields\": [\"profile_pic\"]}}]',12,1),(76,'2020-03-29 07:34:08.423535','1','Diah',2,'[{\"changed\": {\"fields\": [\"profile_pic\"]}}]',12,1),(77,'2020-03-29 07:42:31.489492','5','Komarun',2,'[{\"changed\": {\"fields\": [\"profile_pic\"]}}]',12,1),(78,'2020-03-29 07:43:01.852582','5','Komarun',2,'[{\"changed\": {\"fields\": [\"profile_pic\"]}}]',12,1),(79,'2020-03-29 07:43:39.322469','5','Komarun',2,'[{\"changed\": {\"fields\": [\"profile_pic\"]}}]',12,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,7 +346,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -371,7 +372,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -380,7 +381,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2020-03-14 02:59:08.316942'),(2,'auth','0001_initial','2020-03-14 02:59:08.748932'),(3,'admin','0001_initial','2020-03-14 02:59:08.857664'),(4,'admin','0002_logentry_remove_auto_add','2020-03-14 02:59:08.877095'),(5,'admin','0003_logentry_add_action_flag_choices','2020-03-14 02:59:08.904775'),(6,'contenttypes','0002_remove_content_type_name','2020-03-14 02:59:09.000974'),(7,'auth','0002_alter_permission_name_max_length','2020-03-14 02:59:09.061149'),(8,'auth','0003_alter_user_email_max_length','2020-03-14 02:59:09.112078'),(9,'auth','0004_alter_user_username_opts','2020-03-14 02:59:09.133741'),(10,'auth','0005_alter_user_last_login_null','2020-03-14 02:59:09.205651'),(11,'auth','0006_require_contenttypes_0002','2020-03-14 02:59:09.211672'),(12,'auth','0007_alter_validators_add_error_messages','2020-03-14 02:59:09.249398'),(13,'auth','0008_alter_user_username_max_length','2020-03-14 02:59:09.337050'),(14,'auth','0009_alter_user_last_name_max_length','2020-03-14 02:59:09.409089'),(15,'auth','0010_user_role_user','2020-03-14 02:59:09.463653'),(16,'auth','0011_remove_user_role_user','2020-03-14 02:59:09.533245'),(17,'auth','0012_user_role_user','2020-03-14 02:59:09.583491'),(18,'auth','0013_remove_user_role_user','2020-03-14 02:59:09.652416'),(19,'auth','0014_user_role_user','2020-03-14 02:59:09.713412'),(20,'auth','0015_remove_user_role_user','2020-03-14 02:59:09.782219'),(21,'auth','0016_user_role_user','2020-03-14 02:59:09.840465'),(22,'auth','0017_remove_user_role_user','2020-03-14 02:59:09.906235'),(23,'auth','0018_user_role_user','2020-03-14 02:59:09.976483'),(24,'auth','0019_remove_user_role_user','2020-03-14 02:59:10.057673'),(25,'auth','0020_user_role_user','2020-03-14 02:59:10.089033'),(26,'auth','0021_remove_user_role_user','2020-03-14 02:59:10.145324'),(27,'auth','0022_user_role_user','2020-03-14 02:59:10.189371'),(28,'auth','0023_remove_user_role_user','2020-03-14 02:59:10.258121'),(29,'auth','0024_user_role_user','2020-03-14 02:59:10.323163'),(30,'auth','0025_remove_user_role_user','2020-03-14 02:59:10.392944'),(31,'auth','0026_user_role_user','2020-03-14 02:59:10.440286'),(32,'auth','0027_remove_user_role_user','2020-03-14 02:59:10.503096'),(33,'auth','0028_user_role_user','2020-03-14 02:59:10.554065'),(34,'auth','0029_remove_user_role_user','2020-03-14 02:59:10.623208'),(35,'auth','0030_user_role_user','2020-03-14 02:59:10.680284'),(36,'auth','0031_remove_user_role_user','2020-03-14 02:59:10.742201'),(37,'berita','0001_initial','2020-03-14 02:59:10.865296'),(38,'sessions','0001_initial','2020-03-14 02:59:10.907238'),(39,'berita','0002_berita_penulis','2020-03-14 03:29:15.877558'),(40,'berita','0003_auto_20200314_0345','2020-03-14 03:45:47.721009'),(41,'berita','0004_auto_20200314_0350','2020-03-14 03:50:51.288851'),(42,'berita','0005_berita_slug','2020-03-14 04:21:51.979537'),(43,'berita','0006_auto_20200314_0422','2020-03-14 04:23:00.832967'),(44,'galery','0001_initial','2020-03-14 10:34:08.252789'),(45,'galery','0002_auto_20200315_0328','2020-03-15 03:29:05.191466'),(46,'jadwal','0001_initial','2020-03-15 04:34:49.468398'),(47,'jadwal','0002_auto_20200315_0438','2020-03-15 04:38:20.062748'),(48,'jadwal','0003_auto_20200315_0600','2020-03-15 06:01:01.941594'),(49,'jadwal','0004_auto_20200315_0612','2020-03-15 06:13:00.370819'),(50,'anggota','0001_initial','2020-03-15 12:33:14.586405'),(51,'anggota','0002_auto_20200315_1236','2020-03-15 12:36:16.248881'),(52,'anggota','0003_auto_20200315_1243','2020-03-15 12:43:08.059826'),(53,'anggota','0004_auto_20200315_1244','2020-03-15 12:44:45.828703'),(54,'anggota','0005_auto_20200315_1245','2020-03-15 12:45:24.288022');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2020-03-14 02:59:08.316942'),(2,'auth','0001_initial','2020-03-14 02:59:08.748932'),(3,'admin','0001_initial','2020-03-14 02:59:08.857664'),(4,'admin','0002_logentry_remove_auto_add','2020-03-14 02:59:08.877095'),(5,'admin','0003_logentry_add_action_flag_choices','2020-03-14 02:59:08.904775'),(6,'contenttypes','0002_remove_content_type_name','2020-03-14 02:59:09.000974'),(7,'auth','0002_alter_permission_name_max_length','2020-03-14 02:59:09.061149'),(8,'auth','0003_alter_user_email_max_length','2020-03-14 02:59:09.112078'),(9,'auth','0004_alter_user_username_opts','2020-03-14 02:59:09.133741'),(10,'auth','0005_alter_user_last_login_null','2020-03-14 02:59:09.205651'),(11,'auth','0006_require_contenttypes_0002','2020-03-14 02:59:09.211672'),(12,'auth','0007_alter_validators_add_error_messages','2020-03-14 02:59:09.249398'),(13,'auth','0008_alter_user_username_max_length','2020-03-14 02:59:09.337050'),(14,'auth','0009_alter_user_last_name_max_length','2020-03-14 02:59:09.409089'),(15,'auth','0010_user_role_user','2020-03-14 02:59:09.463653'),(16,'auth','0011_remove_user_role_user','2020-03-14 02:59:09.533245'),(17,'auth','0012_user_role_user','2020-03-14 02:59:09.583491'),(18,'auth','0013_remove_user_role_user','2020-03-14 02:59:09.652416'),(19,'auth','0014_user_role_user','2020-03-14 02:59:09.713412'),(20,'auth','0015_remove_user_role_user','2020-03-14 02:59:09.782219'),(21,'auth','0016_user_role_user','2020-03-14 02:59:09.840465'),(22,'auth','0017_remove_user_role_user','2020-03-14 02:59:09.906235'),(23,'auth','0018_user_role_user','2020-03-14 02:59:09.976483'),(24,'auth','0019_remove_user_role_user','2020-03-14 02:59:10.057673'),(25,'auth','0020_user_role_user','2020-03-14 02:59:10.089033'),(26,'auth','0021_remove_user_role_user','2020-03-14 02:59:10.145324'),(27,'auth','0022_user_role_user','2020-03-14 02:59:10.189371'),(28,'auth','0023_remove_user_role_user','2020-03-14 02:59:10.258121'),(29,'auth','0024_user_role_user','2020-03-14 02:59:10.323163'),(30,'auth','0025_remove_user_role_user','2020-03-14 02:59:10.392944'),(31,'auth','0026_user_role_user','2020-03-14 02:59:10.440286'),(32,'auth','0027_remove_user_role_user','2020-03-14 02:59:10.503096'),(33,'auth','0028_user_role_user','2020-03-14 02:59:10.554065'),(34,'auth','0029_remove_user_role_user','2020-03-14 02:59:10.623208'),(35,'auth','0030_user_role_user','2020-03-14 02:59:10.680284'),(36,'auth','0031_remove_user_role_user','2020-03-14 02:59:10.742201'),(37,'berita','0001_initial','2020-03-14 02:59:10.865296'),(38,'sessions','0001_initial','2020-03-14 02:59:10.907238'),(39,'berita','0002_berita_penulis','2020-03-14 03:29:15.877558'),(40,'berita','0003_auto_20200314_0345','2020-03-14 03:45:47.721009'),(41,'berita','0004_auto_20200314_0350','2020-03-14 03:50:51.288851'),(42,'berita','0005_berita_slug','2020-03-14 04:21:51.979537'),(43,'berita','0006_auto_20200314_0422','2020-03-14 04:23:00.832967'),(44,'galery','0001_initial','2020-03-14 10:34:08.252789'),(45,'galery','0002_auto_20200315_0328','2020-03-15 03:29:05.191466'),(46,'jadwal','0001_initial','2020-03-15 04:34:49.468398'),(47,'jadwal','0002_auto_20200315_0438','2020-03-15 04:38:20.062748'),(48,'jadwal','0003_auto_20200315_0600','2020-03-15 06:01:01.941594'),(49,'jadwal','0004_auto_20200315_0612','2020-03-15 06:13:00.370819'),(50,'anggota','0001_initial','2020-03-15 12:33:14.586405'),(51,'anggota','0002_auto_20200315_1236','2020-03-15 12:36:16.248881'),(52,'anggota','0003_auto_20200315_1243','2020-03-15 12:43:08.059826'),(53,'anggota','0004_auto_20200315_1244','2020-03-15 12:44:45.828703'),(54,'anggota','0005_auto_20200315_1245','2020-03-15 12:45:24.288022'),(55,'anggota','0006_auto_20200329_0726','2020-03-29 07:26:35.142025'),(56,'anggota','0007_auto_20200329_0733','2020-03-29 07:33:14.981570');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,7 +398,7 @@ CREATE TABLE `django_session` (
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -406,7 +407,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('bx84azbx7ahp0qvo9uymxsjsaq59ii7n','MWQyYjAwYzUwODQ3NDNhNDI0MGQ3Yjc1ZDVhOTA2NTU4MjJmNDgxMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWE3ZWQ1YmM5NGZlYmE0YjM5OGIzM2EzZTE5ZDVmYzVjYzM2YTMzIn0=','2020-04-03 10:56:14.628884'),('f1i1r55l0q1o6bf8yz9p8nwao2aylr1s','MWQyYjAwYzUwODQ3NDNhNDI0MGQ3Yjc1ZDVhOTA2NTU4MjJmNDgxMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWE3ZWQ1YmM5NGZlYmE0YjM5OGIzM2EzZTE5ZDVmYzVjYzM2YTMzIn0=','2020-04-04 12:55:06.687754'),('gbwnyfq1xn5kfwypo4pfytz06mc9oiel','MWQyYjAwYzUwODQ3NDNhNDI0MGQ3Yjc1ZDVhOTA2NTU4MjJmNDgxMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWE3ZWQ1YmM5NGZlYmE0YjM5OGIzM2EzZTE5ZDVmYzVjYzM2YTMzIn0=','2020-03-29 17:16:24.594970'),('tmxftxcahdjz6tm85b8bw95ebrl0dbcm','MWQyYjAwYzUwODQ3NDNhNDI0MGQ3Yjc1ZDVhOTA2NTU4MjJmNDgxMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWE3ZWQ1YmM5NGZlYmE0YjM5OGIzM2EzZTE5ZDVmYzVjYzM2YTMzIn0=','2020-04-01 13:50:07.500188');
+INSERT INTO `django_session` VALUES ('bx84azbx7ahp0qvo9uymxsjsaq59ii7n','MWQyYjAwYzUwODQ3NDNhNDI0MGQ3Yjc1ZDVhOTA2NTU4MjJmNDgxMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWE3ZWQ1YmM5NGZlYmE0YjM5OGIzM2EzZTE5ZDVmYzVjYzM2YTMzIn0=','2020-04-03 10:56:14.628884'),('f1i1r55l0q1o6bf8yz9p8nwao2aylr1s','MWQyYjAwYzUwODQ3NDNhNDI0MGQ3Yjc1ZDVhOTA2NTU4MjJmNDgxMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWE3ZWQ1YmM5NGZlYmE0YjM5OGIzM2EzZTE5ZDVmYzVjYzM2YTMzIn0=','2020-04-04 12:55:06.687754'),('gbwnyfq1xn5kfwypo4pfytz06mc9oiel','MWQyYjAwYzUwODQ3NDNhNDI0MGQ3Yjc1ZDVhOTA2NTU4MjJmNDgxMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWE3ZWQ1YmM5NGZlYmE0YjM5OGIzM2EzZTE5ZDVmYzVjYzM2YTMzIn0=','2020-03-29 17:16:24.594970'),('t258vheife84zzoae857krrytldvq0lz','MWQyYjAwYzUwODQ3NDNhNDI0MGQ3Yjc1ZDVhOTA2NTU4MjJmNDgxMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWE3ZWQ1YmM5NGZlYmE0YjM5OGIzM2EzZTE5ZDVmYzVjYzM2YTMzIn0=','2020-04-12 07:12:38.173487'),('tmxftxcahdjz6tm85b8bw95ebrl0dbcm','MWQyYjAwYzUwODQ3NDNhNDI0MGQ3Yjc1ZDVhOTA2NTU4MjJmNDgxMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMWE3ZWQ1YmM5NGZlYmE0YjM5OGIzM2EzZTE5ZDVmYzVjYzM2YTMzIn0=','2020-04-01 13:50:07.500188');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -422,7 +423,7 @@ CREATE TABLE `galery_image` (
   `title` varchar(120) NOT NULL,
   `image` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -448,7 +449,7 @@ CREATE TABLE `galery_video` (
   `url_video` varchar(1200) NOT NULL,
   `youtube_id` varchar(122) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -474,7 +475,7 @@ CREATE TABLE `jadwal_jadwal` (
   `start` date DEFAULT NULL,
   `end` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -496,4 +497,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-21 20:00:43
+-- Dump completed on 2020-03-29 14:51:21

@@ -6,13 +6,14 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('login/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path("", include('berita.urls'), name="home"),
     path("galery/", include('galery.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),     
     path("api/", include('api.urls'), name="api"),
     path("jadwal", include('jadwal.urls')),
-    path("database/", include('anggota.urls'))
+    path("database/", include('anggota.urls')),
+    path("auth/", include('auth.urls'), name="auth")
 ]
 
 if settings.DEBUG:

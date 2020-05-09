@@ -30,6 +30,8 @@ SECRET_KEY = 'c*%pk$g&8v=ne8996cztws)u2bi4=jj$2yk10o=0@ytg&asmwx'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+THUMBNAIL_FORCE_OVERWRITE = True
+
 
 
 # Application definition
@@ -47,7 +49,8 @@ INSTALLED_APPS = [
     'rest_framework', 
     'galery',
     'jadwal',
-    'anggota'
+    'anggota',
+
 
 ]
 

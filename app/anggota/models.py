@@ -7,6 +7,7 @@ class Anggota(models.Model):
         (u'anggota', u'anggota'),
         (u'pengurus', u'pengurus'),
     ]
+    profile_pic = models.ImageField(upload_to='profile_pic', default="profile_pic/default.jpeg")
     nama = models.CharField(max_length=100)
     alamat = models.CharField(max_length=100)
     no_hp = models.CharField(max_length=100)

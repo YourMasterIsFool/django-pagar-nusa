@@ -406,13 +406,14 @@ textarea:focus {
     border-bottom: 1px solid #d0d5d8; }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
       .header-area .newspaper-main-menu {
-        background-color: #152535; } }
+        background-color: #0caf2f; } }
     @media only screen and (max-width: 767px) {
       .header-area .newspaper-main-menu {
         background-color: #152535;
         height: 70px; } }
     .header-area .newspaper-main-menu .classy-nav-container {
-      background-color: transparent; }
+      background-color: transparent;
+     }
     .header-area .newspaper-main-menu .classy-navbar {
       height: 80px;
       padding: 0; }

@@ -39,7 +39,6 @@
                             <!-- Logo -->
                             <div class="logo">
                                 <div id="logo">Pagar Nusa </div>
-                                <div id="logo1">Banyuwangi</div>
                                 <!-- <a href="{% url 'index' %}"><img src="{% static 'img/core-img/logo.png'%}" alt=""></a> -->
                             </div>
 
@@ -47,7 +46,7 @@
                             <div class="login-search-area d-flex align-items-center">
                                 <!-- Login -->
                                 <div class="login d-flex">
-                                    <a href="/login">Login</a>
+                                    <a href="{% url 'login' %}">Login</a>
                                 </div>
                                 <!-- Search Form -->
                                 <div class="search-form">
@@ -72,7 +71,8 @@
 
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"><img src="{% static 'img/core-img/logo.png'%}" alt=""></a>
+                            <p> Pagar nusa Banyuwangi </p>
+                            {% comment %} <a href="index.html"><img src="{% static 'img/core-img/logo.png'%}" alt=""></a> {% endcomment %}
                         </div>
 
                         <!-- Navbar Toggler -->
