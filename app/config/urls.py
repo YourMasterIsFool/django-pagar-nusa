@@ -13,7 +13,8 @@ urlpatterns = [
     path("api/", include('api.urls'), name="api"),
     path("jadwal", include('jadwal.urls')),
     path("database/", include('anggota.urls')),
-    path("auth/", include('auth.urls'), name="auth")
+    path("auth/", include('auth.urls'), name="auth"),
+    path("c-panel/", include('controlpanel.urls'), name="")
 ]
 
 if settings.DEBUG:

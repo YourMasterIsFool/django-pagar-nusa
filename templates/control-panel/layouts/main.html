@@ -1,0 +1,77 @@
+{% load static %}
+<dashboard<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'c-panel/plugins/fontawesome-free/css/all.min.css'%}">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="{% static  'c-panel/plugins/icheck-bootstrap/icheck-bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{% static 'c-panel/dist/css/adminlte.min.css'%}">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  {% block css %}
+  {% endblock css %}
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  
+  {% include './header.html' %}
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+
+    <!-- Sidebar -->
+    {% include './sidebar.html' %}
+    
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    {% block content %}
+    {% endblock content %}
+    <!-- Content Header (Page header) -->
+    
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.4
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{% static 'c-panel/plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'c-panel/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<script src="{% static 'c-panel/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'c-panel/plugins/jqvmap/jquery.vmap.min.js'%}"></script>
+<script src="{% static 'c-panel/plugins/jqvmap/maps/jquery.vmap.usa.js'%}"></script>
+<script src="{% static 'c-panel/plugins/jquery-knob/jquery.knob.min.js'%}"></script>
+<script src="{% static 'c-panel/dist/js/adminlte.js'%}"></script>
+<script src="{% static 'c-panel/dist/js/pages/dashboard.js'%}"></script>
+<script src="{% static 'dist/js/demo.js'%}"></script>
+{% block js %}
+{% endblock js %}
+</body>
+</html>
