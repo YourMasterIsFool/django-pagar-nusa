@@ -9,6 +9,7 @@ class UserSerialize(serializers.ModelSerializer):
 
 class AddNewsSerialize(serializers.ModelSerializer):
     title = serializers.CharField(required=False, allow_null=True)
+    body = serializers.CharField(required=False, allow_null=True)
     class Meta:
         model = Berita
         fields = ['title', 'thumbnail', 'body']
@@ -17,6 +18,13 @@ class AddNewsSerialize(serializers.ModelSerializer):
         if not value:
             raise serializers.ValidationError("Title field is required.!")
         return value
+
+    def validate_body(self, value):
+        if not value:
+            raise serializers.ValidationError("Body is required")
+        return value
+
+    
 
 
 class NewsSerialize(serializers.ModelSerializer):

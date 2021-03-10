@@ -1,0 +1,477 @@
+
+{% extends 'control-panel/layouts/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'c-panel/plugins/summernote/summernote-bs4.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<!-- Content Header (Page header) -->
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+    
+                <div class="card-tools">
+                  <div class="input-group input-group-sm">
+                    <div class="input-group-append">
+                        <a href="#add_user" data-toggle="modal" class="btn btn-primary btn-block mb-1 "><i class="fas fa-plus"> Tambah User Admin</i></a>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-tools -->
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="table-responsive mailbox-messages">
+                    <table id="user-admin" class="table table-bordered table-striped response">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Trident</td>
+                            <td>Internet
+                            Explorer 4.0
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                  <!-- /.table -->
+                </div>
+                <!-- /.mail-box-messages -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+      <!-- /.col -->
+      <div class="col-md-8">
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">Data Anggota</h3>
+
+            <div class="card-tools">
+              <div class="input-group input-group-sm">
+                <div class="input-group-append">
+                    <a href="#tambah_anggota" data-toggle="modal" class="btn btn-primary btn-block mb-3 "><i class="fas fa-plus"> Tambah Anggota</i></a>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="table-responsive mailbox-messages" >
+              <!-- /.table -->
+              <table id="anggota" class="table table-bordered table-striped response">
+                <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>Jabatan</th>
+                    <th>No Hp</th>
+                    <th>Status</th>
+                    <th>Edit / Delete</th>
+                </tr>
+                </thead>
+                <tbody id="table-anggota">
+                
+                </tbody>
+            </table>
+            </div>
+            <!-- /.mail-box-messages -->
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+
+ <!-- modal -->
+<div class="modal fade" id="add_user">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add User</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-validate" method="post" >
+                        <div id="alert-post-user" class="hidden"></div>
+                        <div class="form-group">
+                            <label for="teitel">Username</label>
+                            <input type="text" name="username" class=form-control>
+                        </div>
+                        <div class="form-group">
+                            <label for="teitel">Email</label>
+                            <input type="email" name="email" class=form-control>
+                        </div>
+                        <div class="form-group">
+                            <label for="teitel">Passworad</label>
+                            <input  type="text" name="password" class=form-control>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                    <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit"  class="btn btn-primary btn-save">Save changes</button>
+                </form>
+            </div>
+        </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="tambah_anggota">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Tambah Anggota</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form class="tambah-anggota" method="post" >
+                      <div id="alert-post-anggota" class="hidden"></div>
+                      <div class="form-group">
+                          <label for="teitel">Nama</label>
+                          <input type="text" name="nama" class=form-control>
+                      </div>
+                      <div class="form-group">
+                          <label for="teitel">Alamat</label>
+                          <input type="text" name="alamat" class=form-control>
+                      </div>
+                      <div class="form-group">
+                        <label for="teitel">No Hp</label>
+                        <input type="number" name="no_hp" class=form-control>
+                      </div>
+                      <div class="form-group">
+                          <label for="teitel">jabatan</label>
+                          <input  type="text" name="jabatan" class=form-control>
+                      </div>
+                      <div class="form-group">
+                        <label for="teitel">Status</label>
+                        <input  type="text" name="status" class=form-control>
+                    </div>
+                    <div class="form-group">
+                      <label for="teitel">Profile Picture</label>
+                      <input  type="file" name="profile_pic" id="profile_pic" class=form-control>
+                  </div>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                  <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit"  class="btn btn-primary btn-save">Save changes</button>
+              </form>
+          </div>
+      </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- edit anggota -->
+<div class="modal fade" id="edit_anggota">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tambah Anggota</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="edit-anggota" method="post" >
+                        <div id="alert-edit-anggota" class="hidden"></div>
+                        <div class="form-group">
+                            <label for="teitel">Nama</label>
+                            <input type="text" id="nama" name="nama" class=form-control>
+                        </div>
+                        <div class="form-group">
+                            <label for="teitel">Alamat</label>
+                            <input type="text" id="alamat" name="alamat" class=form-control>
+                        </div>
+                        <div class="form-group">
+                          <label for="teitel">No Hp</label>
+                          <input type="number" id="no_hp" name="no_hp" class=form-control>
+                        </div>
+                        <div class="form-group">
+                            <label for="teitel">jabatan</label>
+                            <input  type="text" id="jabatan" name="jabatan" class=form-control>
+                        </div>
+                        <div class="form-group">
+                          <label for="teitel">Status</label>
+                          <input  type="text" id="status" name="status" class=form-control>
+                      </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                    <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit"  class="btn btn-primary btn-save">Save changes</button>
+                </form>
+            </div>
+        </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+<!-- delete anggota -->
+
+<div class="modal fade"  id="delete-anggota">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Apakah Anda yakin akan menghapus data Anggota. ? <b class='deleted__project'></b></p>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" aria-label="Close" class="btn btn-flat left" href="">Cancel</a>
+                <a class="btn btn-danger right" href="#delete">Hapus</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
+
+{% block js %}
+
+<script
+    src="https://code.jquery.com/jquery-3.4.1.min.js" 
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/buttons/1.6.3/js/dataTables.buttons.min.js"></script> -->
+<script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+<script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+<script>
+    $(function (){
+
+        var editor;
+        var token = localStorage.getItem('token');
+        $.ajaxSetup({
+            headers: {
+                "Authorization": "Token " + token
+            }
+        });
+
+        function table_user_admin(response){
+            $('#user-admin').DataTable({
+                data:response,
+                columns: [
+                    { data: "username" },
+                    { data: "email" },
+                ],
+            })
+        }
+
+        function list_user_admin(){
+            $.ajax({
+                url:"/api/list-user/",
+                type:'GET'
+            }).done(function(response){
+                table_user_admin(response)
+            })
+        }
+
+        list_user_admin()
+        
+        $('.form-validate').submit(function(e){
+            console.log(e)
+            e.preventDefault()
+            data = $(this).serialize()
+            $.ajax({
+              url: '/api/register/', 
+              data: data,
+              type: 'POST',
+              beforeSend: function(){
+                  $('.btn-save').html("<i class='fa fa-spinner fa fa-spin' style='color:white'></i> <font color='white'>Saving...</font>");
+                  $('.brn-save').attr('disabled',true);
+              }  
+              }).done(function(response) {
+                  window.location.reload()
+              })
+              .fail(function(error) {
+                  var data = error.responseText;
+                  var json = JSON.parse(data)
+                  $.each(json, function(key, val){
+                      $('#alert-post-user').html('<div class="alert alert-danger">' + val + '</div>')
+                      $('#alert-post-user').removeClass('hidden')    
+                  })
+                  $('.btn-save').html("<font color='white'>Save changes</font>");
+            });
+        })
+
+
+
+        // edit anggota
+        $('#edit_anggota').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var nama = button.data('nama')
+            var alamat = button.data('alamat')
+            var jabatan = button.data('jabatan')
+            var status = button.data('status')
+            var no_hp = button.data('no_hp')            
+            var modal = $(this)
+
+
+            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #nama').val(nama);
+            modal.find('.modal-body #alamat').val(alamat);
+            modal.find('.modal-body #jabatan').val(jabatan);
+            modal.find('.modal-body #status').val(status);
+            modal.find('.modal-body #no_hp').val(no_hp);
+
+            $('.edit-anggota').submit(function(e){
+                e.preventDefault()
+                data = $(this).serialize()
+                var profile_pic = $('#profile_pic')[0].files[0]
+                var form_data = new FormData(this)
+                form_data.append('profile_pic', profile_pic)
+                $.ajax({
+                    url: '/api/edit-anggota/' + id  + "/", 
+                    data: data,
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'PUT',
+                    beforeSend: function(){
+                        $('.btn-save').html("<i class='fa fa-spinner fa fa-spin' style='color:white'></i> <font color='white'>Saving...</font>");
+                        $('.brn-save').attr('disabled',true);
+                    }  
+                }).done(function(response) {
+                    window.location.reload()
+                })
+                .fail(function(error) {
+                    var data = error.responseText;
+                    var json = JSON.parse(data)
+                    $.each(json, function(key, val){
+                        $('#alert-edit-anggota').html('<div class="alert alert-danger">' + val + '</div>')
+                        $('#alert-edit-anggota').removeClass('hidden')    
+                    })
+                    $('.btn-save').html("<font color='white'>Save changes</font>");
+                });
+            })
+
+        })
+        
+        // delete anggota
+        $('#delete-anggota').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            console.log(id)
+            $('a[href="#delete"]').click(function(){
+                $.ajax({
+                    url:'/api/delete-anggota/' + id + '/',
+                    contentType: 'application/json',
+                    dataType:'json',
+                    type: 'DELETE',
+                }).done(function(response){
+                    location.reload()
+                }).fail(function(error){
+                    //
+                })
+            });         
+        })
+
+
+        function table_anggota(res){
+            console.log(res)
+            var html = ``
+            for(item in res){
+                var val = res[item]
+                html += `<tr>
+                            <td>${val.nama}</td>
+                            <td>${val.alamat}</td>
+                            <td>${val.jabatan}</td>
+                            <td>${val.no_hp}</td>
+                            <td>${val.status}</td>
+                            <td>
+                                <a href="#edit_anggota" data-id="${val.id}"
+                                    data-nama="${val.nama}"
+                                    data-jabatan="${val.jabatan}"
+                                    data-alamat="${val.status}"
+                                    data-status="${val.alamat}"
+                                    data-no_hp="${val.no_hp}"
+                                    data-toggle="modal">Edit</a> / 
+                                <a href="#delete-anggota" data-id="${val.id}" data-toggle="modal">Delete</a>
+                            </td>
+                        </tr>`
+                document.getElementById('table-anggota').innerHTML = html
+            }
+        }
+
+        $('#anggota').DataTable({ 
+            "searching": false
+            
+        })
+
+        function list_anngota(){
+            $.ajax({
+                url:'/api/list-anggota',
+                type:'GET',
+            }).done(function(response){
+                table_anggota(response)
+            })
+        }
+
+        list_anngota()
+
+        $('.tambah-anggota').submit(function(e){
+            e.preventDefault()
+            data = $(this).serialize()
+            var profile_pic = $('#profile_pic')[0].files[0]
+            var form_data = new FormData(this)
+            form_data.append('profile_pic', profile_pic)
+            $.ajax({
+                url: '/api/add-anggota/', 
+                data: data,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'POST',
+                beforeSend: function(){
+                    $('.btn-save').html("<i class='fa fa-spinner fa fa-spin' style='color:white'></i> <font color='white'>Saving...</font>");
+                    $('.brn-save').attr('disabled',true);
+                }  
+              }).done(function(response) {
+                  window.location.reload()
+              })
+              .fail(function(error) {
+                  var data = error.responseText;
+                  var json = JSON.parse(data)
+                  $.each(json, function(key, val){
+                      $('#alert-post-anggota').html('<div class="alert alert-danger">' + val + '</div>')
+                      $('#alert-post-anggota').removeClass('hidden')    
+                  })
+                  $('.btn-save').html("<font color='white'>Save changes</font>");
+            });
+        })
+        
+    })
+    
+        
+</script>
+{% endblock %}

@@ -4,9 +4,10 @@ from django.shortcuts import render
 def dhashboard(request):
     return render(request, 'control-panel/dashboard.html')
     
+def c_user(request):
+    return render(request, 'control-panel/users.html')
 
 def c_berita(request):
-   
     return render(request, 'control-panel/berita/c_berita.html')
 
 def c_album_foto(request):

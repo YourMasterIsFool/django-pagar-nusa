@@ -1,5 +1,5 @@
 from django.contrib import admin
-from berita.models import Kategory, Berita
+from berita.models import Kategory, Berita, StatusNews
 # Register your models here.
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -13,9 +13,10 @@ class BeritaAdmin(admin.ModelAdmin):
     class Meta:
         model = Berita
 
-admin.site.site_header = "LOGIN"
+admin.site.site_header = "PAGAR NUSA Admin Panel"
 admin.site.site_title = "PAGAR NUSA Admin Panel"
 admin.site.index_title = "PAGAR NUSA Admin Panel"
 admin.site.register(Kategory, CategoryAdmin)
 admin.site.register(Berita, BeritaAdmin)
+admin.site.register(StatusNews)
 

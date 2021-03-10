@@ -38,15 +38,19 @@
                         <div class="top-header-content d-flex align-items-center justify-content-between">
                             <!-- Logo -->
                             <div class="logo">
-                                <!-- <div id="logo">Pagar Nusa Banyuwangi </div> -->
-                                <a id="logo" href="{% url 'index' %}">Pagar Nusa Banyuwangi</a>
+                                <a href="index.html"><img src="{% static 'img/core-img/logo.png'%}" alt=""></a>
                             </div>
 
                             <!-- Login Search Area -->
                             <div class="login-search-area d-flex align-items-center">
                                 <!-- Login -->
                                 <div class="login d-flex">
-                                    <a href="{% url 'login' %}">Login</a>
+                                    {% if request.user.is_authenticated %}
+                                    <a href="/admin-panel/">Admin Panel</a>
+                                    <a href="{% url 'logout' %}">Logout</a>
+                                    {% else %}
+                                    <a href="/admin-panel/login">Login</a>
+                                    {% endif %}
                                 </div>
                                 <!-- Search Form -->
                                 <div class="search-form">
@@ -64,15 +68,15 @@
 
         <!-- Navbar Area -->
         <div class="newspaper-main-menu" id="stickyMenu">
-            <div class="classy-nav-container breakpoint-off">
+            <div class="classy-nav-container breakpoint">
                 <div class="container">
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="newspaperNav">
 
                         <!-- Logo -->
                         <div class="logo">
-                            <p id="logo1"> Pagar Nusa Banyuwangi </p>
-                            {% comment %} <a href="index.html"><img src="{% static 'img/core-img/logo.png'%}" alt=""></a> {% endcomment %}
+                            {% comment %} <p id="logo1"> Pagar Nusa Banyuwangi </p> {% endcomment %}
+                            <a href="index.html"><img src="{% static 'img/core-img/logo.png'%}" alt=""></a>
                         </div>
 
                         <!-- Navbar Toggler -->
@@ -91,15 +95,15 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="active"><a href="{% url 'index' %}">HOME</a></li>
-                                    <li><a href="#">Gallery</a>
+                                    <li class="{% if request.get_full_path == '/'   %} active {% endif %}"><a href="{% url 'index' %}">HOME</a></li>
+                                    <li class="{% if request.get_full_path == '/galery/'%} active {% endif %}"><a href="#">Gallery</a>
                                         <ul class="dropdown">
                                             <li><a href="{% url 'index-galery' %}">IMAGE</a></li>
                                             <li><a href="{% url 'video-galery' %}">VIDEO</a></li>
                                         </ul>
                                     </li>   
-                                    <li><a href="{% url 'index-jadwal' %}">JADWAL</a></li>
-                                    <li><a href="#">DATABASE PENGURUS</a>
+                                    <li class="{% if request.get_full_path == '/jadwal' %} active {% endif %}"><a href="{% url 'index-jadwal' %}">JADWAL</a></li>
+                                    <li class+"{% if request.get_full_path == '/database/anggota/' %}{% endif %}"><a href="#">DATABASE PENGURUS</a>
                                         <ul class="dropdown">
                                             <li><a href="{% url 'data-anggota' status='anggota' %}">ANGGOTA</a></li>
                                             <li><a href="{% url 'data-anggota' status='pengurus' %}">PENGURUS</a></li>

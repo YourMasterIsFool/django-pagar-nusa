@@ -8,25 +8,55 @@
 {% block content %}
 
 
-<!-- Content Header (Page header) -->
-<section class="content-header">
+<!-- Main content -->
+ <section class="content">
     <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <a href="#tambah_berita" data-toggle="modal" class="btn btn-info">Tambah Berita</a>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-append">
+                                    <a href="#tambah_berita" data-toggle="modal" class="btn btn-primary btn-block mb-1 "><i class="fas fa-plus"> Add News</i></a>
+                                </div>
+                            </div>
+                          </div>
+                       <h3 class="card-title">All News</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row" id="list-news">
+                            <div class="col-sm-4">
+                                <div class="position-relative p-3 bg-gray" style="height: 180px">
+                                    <div class="ribbon-wrapper">
+                                        <div class="ribbon bg-primary">
+                                            Ribbon
+                                        </div>
+                                    </div>
+                                    Ribbon Default <br />
+                                    <small>.ribbon-wrapper.ribbon-lg .ribbon</small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="position-relative p-3 bg-gray" style="height: 180px">
+                                    <div class="ribbon-wrapper">
+                                        <div class="ribbon bg-primary">
+                                            Ribbon
+                                        </div>
+                                    </div>
+                                    Ribbon Default <br />
+                                    <small>.ribbon-wrapper.ribbon-lg .ribbon</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div><!-- /.container-fluid -->
-</section>
-
-    <!-- Main content -->
-<section class="content">
-    <div class="row">
-        
-    <!-- /.col-->
     </div>
-    <!-- ./row -->
-</section>
+ </section>
+
 
  <!-- modal -->
 <div class="modal fade" id="tambah_berita">
@@ -39,24 +69,26 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" >
+                    <form id="post-news" method="post" >
+                        {% csrf_token %}
+                        <div id="alert-post-news" class="hidden"></div>
                         <div class="form-group">
                             <label for="teitel">Judul</label>
-                            <input type="text" name="title" class=form-control>
+                            <input type="text" id="title" name="title" class=form-control>
                         </div>
                         <div class="form-group">
                             <label for="teitel">Thumbnail</label>
-                            <input type="file" name="thumbnail" class=form-control>
+                            <input type="file" id="thumbnail" name="thumbnail" class=form-control>
                         </div>
                         <div class="form-group">
                             <label for="">Berita</label>
-                            <textarea class="textarea" placeholder="Place some text here"
+                            <textarea id="body" name="body" class="textarea" placeholder="Place some text here"
                         style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-save">Save changes</button>
                 </form>
             </div>
         </div>
@@ -70,11 +102,88 @@
 
 {% block js %}
 
+<script
+    src="https://code.jquery.com/jquery-3.4.1.min.js" 
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
 <script src="{% static 'c-panel/plugins/summernote/summernote-bs4.min.js' %}"></script>
 <script>
     $(function () {
-      // Summernote
-      $('.textarea').summernote()
+        $('.textarea').summernote()
+        console.log('test')
+        var token = localStorage.getItem('token');
+        $.ajaxSetup({
+            headers: {
+                "Authorization": "Token " + token
+            }
+        });
+
+        function all_news(response){
+            var html = ``
+            for (item in response){
+                var val = response[item]
+                html += `<div class="col-sm-4">
+                            <div class="position-relative p-3 bg-gray" style="height: 180px">
+                                <div class="ribbon-wrapper">
+                                    <div class="ribbon bg-primary">
+                                        Ribbon
+                                    </div>
+                                </div>
+                                Ribbon Default <br />
+                                <small>.ribbon-wrapper.ribbon-lg .ribbon</small>
+                            </div>
+                        </div>`
+                document.getElementById('lisst-news').innerHTML = html
+            }
+        }
+
+        function list_news(){
+            $.ajax({
+                url:"/api/all-news/",
+                type:"GET"
+            }).done(function(response){
+                all_news(response)
+            })
+        }
+
+        list_news()
+        
+        $('#post-news').submit(function(e){            
+            e.preventDefault()
+            data = $(this).serialize()
+            var thumbnail = $('#thumbnail')[0].files[0]
+            var form_data = new FormData(this)
+            form_data.append('thumbnail', thumbnail)
+            $.ajax({
+                url:'/api/post-news/',
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type:'POST',
+                beforeSend: function(){
+                    $('.btn-save').html("<i class='fa fa-spinner fa fa-spin' style='color:white'></i> <font color='white'>Saving...</font>");
+                    $('.brn-save').attr('disabled',true);
+                }  
+                }).done(function(response) {
+                    window.location.reload()
+                })
+                .fail(function(error) {
+                    var data = error.responseText;
+                    var json = JSON.parse(data)
+                    $.each(json, function(key, val){
+                        $('#alert-post-news').html('<div class="alert alert-danger">' + val + '</div>')
+                        $('#alert-post-news').removeClass('hidden')    
+                    })
+                    $('.btn-save').html("<font color='white'>Save changes</font>");
+
+            })
+        })
     })
 </script>
 {% endblock %}

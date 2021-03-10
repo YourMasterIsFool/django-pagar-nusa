@@ -20,10 +20,10 @@
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
 							<form method="POST" class="my-login-validation" novalidate="">
-								{% csrf_token %}
+								<div id="message" class="alert" style="margin-bottom: 8px;"></div>
                                 <div class="form-group">
 									<label for="email">Username</label>
-									<input id="username" type="text" class="form-control" name="username" value="" required autofocus>
+									<input id="username" type="text" class="form-control" id="username" name="username" value="" required autofocus>
 									<div class="invalid-feedback">
 										Username is valid
 									</div>
@@ -32,7 +32,7 @@
 								<div class="form-group">
 									<label for="password">Password
 									</label>
-									<input id="password" type="password" class="form-control" name="password" required data-eye>
+									<input id="password" type="password" class="form-control" id="pwd" name="password" required data-eye>
 								    <div class="invalid-feedback">
 								    	Password is required
 							    	</div>
@@ -46,7 +46,7 @@
 								</div>
 
 								<div class="form-group m-0">
-									<button type="submit" class="btn btn-primary btn-block">
+									<button type="submit" class="btn btn-primary btn-block btn-save">
 										Login
 									</button>
 								</div>
@@ -58,9 +58,56 @@
 		</div>
 	</section>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script
+		src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous">
+	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
 	<script src="{% static 'auth/js/auth.js' %}"></script>
+	<script>
+		$(function(){
+			$('.my-login-validation').submit(function(e){
+				console.log(e)
+				e.preventDefault();
+				data = $(this).serialize();
+				$.ajax({
+                    url: '/api/login/', 
+                    data: data,
+                    type: 'POST',
+					beforeSend: function(){
+                        $('.btn-save').html("<i class='fa fa-spinner fa fa-spin' style='color:white'></i> <font color='white'>Sign in...</font>");
+                        $('.brn-save').attr('disabled',true);
+                    }  
+					}).done(function(response) {
+
+						// console.log(response)
+						username = document.querySelector('#username');
+						username.focus();
+						localStorage.setItem('token',response.key)
+						window.location= '/c-panel';
+					})
+					.fail(function(err) {
+						console.log(err)
+						errorMessageLogin = err.responseJSON.non_field_errors;
+						message = document.querySelector('#message');
+						message.style.display = "block";
+						message.setAttribute('class', 'alert-danger form-control')
+						message.innerHTML = 'Invalid username and password';
+						username.style.border = '1px solid red';
+						pwd.style.border = '1px solid red';
+						message.style.border = "1 px solid red";						
+						
+						setTimeout(function() {
+							message.style.display = "none";
+						},60000)
+						$('.btn-save').html("<font color='white'>Sign in</font>");
+					});
+			});
+		})
+	</script>
+
 </body>
 </html>

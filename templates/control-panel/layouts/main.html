@@ -69,8 +69,9 @@
 <script src="{% static 'c-panel/plugins/jqvmap/maps/jquery.vmap.usa.js'%}"></script>
 <script src="{% static 'c-panel/plugins/jquery-knob/jquery.knob.min.js'%}"></script>
 <script src="{% static 'c-panel/dist/js/adminlte.js'%}"></script>
-<script src="{% static 'c-panel/dist/js/pages/dashboard.js'%}"></script>
-<script src="{% static 'dist/js/demo.js'%}"></script>
+{% comment %} <script src="{% static 'c-panel/dist/js/pages/dashboard.js'%}"></script> {% endcomment %}
+{% comment %} <script src="{% static 'dist/js/demo.js'%}"></script> {% endcomment %}
+
 {% block js %}
 {% endblock js %}
 </body>

@@ -7,8 +7,12 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from api.auth.serialize import ListUserSerializer
 
 
+class ListUserApiView(generics.ListAPIView):
+    serializer_class = ListUserSerializer
+    queryset = User.objects.all()
 
 class RegisterApiView(generics.CreateAPIView):
     serializer_class = RegisterSerialize

@@ -15,3 +15,9 @@ class JadwalSerialize(serializers.ModelSerializer):
             'end': instance.end,
         }
         return representation
+
+
+class CreateJadwalSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = Jadwal
+        fields = ['title', 'description', 'start', 'end']
