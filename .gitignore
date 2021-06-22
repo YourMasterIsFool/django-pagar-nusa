@@ -64,12 +64,8 @@ mydatabase
 media/
 exports/
 
-src/telelab/new_settings.py
-src/telelab/old_settings.py
-src/telelab/settings.py
-src/telelab/new_settings.py
-src/telelab/old_settings.py
-src/ssd_mobilenet_v1_coco_2017_11_17/
+
+app/telelab/config/settings.py
 settings.py
 
 
