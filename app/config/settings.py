@@ -27,9 +27,9 @@ pymysql.install_as_MySQLdb()
 SECRET_KEY = 'c*%pk$g&8v=ne8996cztws)u2bi4=jj$2yk10o=0@ytg&asmwx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 THUMBNAIL_FORCE_OVERWRITE = True
 
 
@@ -115,9 +115,9 @@ REST_FRAMEWORK = {
 DATABASES ={
    'default': {
        'ENGINE': 'django.db.backends.mysql',
-       'USER': 'root',
-       'NAME':'django_pn',
-       'PASSWORD': 'keselyoleren',
+       'USER': 'pagarnus_root',
+       'NAME':'pagarnus_bwi',
+       'PASSWORD': 'Prochat!234',
        'HOST': 'localhost',
        'PORT': '3306',
        'CHARSET': 'utf8mb4',
@@ -177,12 +177,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+#STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(os.path.dirname(BASE_DIR), 'static')
 ]
+#STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 MEDIA_URL = '/media/'
-print()
+
