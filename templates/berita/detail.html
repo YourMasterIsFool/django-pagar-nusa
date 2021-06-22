@@ -1,15 +1,31 @@
 
-
 {% extends 'layouts/main.html' %}
 {% load static %}
-{% block content %}
+{% block css %}
+<style>
+    #share-button {margin:0 0 8px;padding:0;overflow:hidden}
+    #share-button p {float:left;box-shadow:1px 1px 5px rgba(1,1,1,.1);background:#fafafa;display:block;padding:5px 8px!important;margin:0 3px 3px 0;border-radius:6px 6px;border:1px solid #fff;font-weight: 700;}
+    #share-button a {position:relative;float:left;box-shadow:1px 1px 5px rgba(1,1,1,.1);border-radius:6px 6px;display:block;color:#fafafa;padding:5px 8px;margin:0 3px 3px;border:1px solid #fff}
+    #share-button a:hover{top:1px;left:1px;box-shadow:0 0 3px rgba(1,1,1,.1)}
+    .wa-button{color:#fff;margin:0 auto;padding:0;font-size:14px;font-weight:700}
+    .wa-button a{color:#222;margin:0 auto;padding:10px 8px;background:#222}
+    .wa-button i{font-weight:400;margin:0 10px 0 0}
+</style>
+<link href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
+{% endblock %}
 
+{% block content %}
     <div class="featured-post-area">
         <div class="container">
+            <div id='share-button'>
+                <p>Share: </p>
+                <a expr:href='#'rel='nofollow' onclick=share("facebook");return false; style='background:#3b5998;' target='_blank' title='Facebook'>Facebook</a>
+                <a expr:href='#' onclick=share("twitter");return false; rel='nofollow' style='background:#4099ff;' target='_blank' title='Twitter'>Twitter</a>
+                <a data-action='share/whatsapp/share' onclick=share("WA");return false; style='background:#43d854' expr:href='#'><i aria-hidden='true' class='fa fa-whatsapp'>WhatsApp</i></a>
+            </div>
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-8">
                     <div class="row">
-
                         <!-- Single Featured Post -->
                         <div class="col-12 col-lg-12">
                             <div class="single-blog-post featured-post">
@@ -32,15 +48,6 @@
                             </div>
                             <div id="disqus_thread"></div>
                             <script>
-                                /**
-                                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-                                /*
-                                var disqus_config = function () {
-                                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                                };
-                                */
                                 (function() { // DON'T EDIT BELOW THIS LINE
                                 var d = document, s = d.createElement('script');
                                 s.src = 'https://pagarnusabwi-org.disqus.com/embed.js';
@@ -50,220 +57,31 @@
                             </script>
                             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                         </div>                        
-                    </div>
+                    </div>  
                 </div>
                 {% include 'layouts/sidebar-news.html' %}
-            </div>
+            </div>  
         </div>
     </div>
-    <!-- ##### Featured Post Area End ##### -->
-
-  
-   
-
-    <!-- ##### Editorial Post Area Start ##### -->
-    <!-- <div class="editors-pick-post-area section-padding-80-50">
-        <div class="container">
-            <div class="row">
-                
-                <div class="col-12 col-md-7 col-lg-9">
-                    <div class="section-heading">
-                        <h6>Editor’s Pick</h6>
-                    </div>
-
-                    <div class="row">
-
-                
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/1.jpg'%}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/2.jpg'%}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/3.jpg'%}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/4.jpg'%}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/5.jpg'%}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/6.jpg'%}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <div class="col-12 col-md-5 col-lg-3">
-                    <div class="section-heading">
-                        <h6>World News</h6>
-                    </div>
-
-                
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/7.jpg'%}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/8.jpg'%}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/9.jpg'%}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/10.jpg'%}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/11.jpg'%}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
 {% endblock %}
+
+{% block js  %}
+<script>
+    var source = window.location.href
+    function share(location){
+        var source = window.location.href
+        var url = ''
+        if (location == "facebook"){
+            url = "https://www.facebook.com/sharer.php?u="+source
+        } else if (location == "twitter"){
+            url = "https://twitter.com/intent/tweet?url="+source
+        } else if (source == "WA"){
+            url = "whatsapp://send?text="+url
+        }
+        window.open(url,'popUpWindow','height=500,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+    }
+</script>
+{% endblock %}
+
     
     
