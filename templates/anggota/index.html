@@ -52,6 +52,7 @@
                                         <th>Alamat</th>
                                         <th>No Hp</th>
                                         <th>Jabatan</th>
+                                        <th>Tingkat</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -64,6 +65,17 @@
                                         <td>{{data.alamat}}</td>
                                         <td>{{data.no_hp}}</td>
                                         <td>{{data.jabatan}}</td>
+                                        <td>
+                                            {% if data.tingkat == 'polos' %}
+                                                <a class="btn btn-info" href="">{{ data.tingkat }}</a>
+                                            {% elif data.tingkat == 'putih' %}
+                                                <a class="btn btn-default" href="">{{ data.tingkat }}</a>
+                                            {% elif data.tingkat == 'kuning' %}
+                                                <a class="btn btn-warning" href="">{{ data.tingkat }}</a>
+                                            {% elif data.tingkat == 'merah' %}
+                                                <a class="btn btn-green" href="">{{ data.tingkat }}</a>
+                                            {% endif %}
+                                        </td>
                                     </tr>    
                                     {% endfor %}
                                 </table>
