@@ -1,3 +1,5 @@
+from email.policy import default
+import venv
 from django.db import models
 
 
@@ -5,6 +7,8 @@ from PIL import Image
 import os.path
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django.utils.translation import gettext as _
+from django.utils.html import format_html
 
 # Create your models here.
 
@@ -13,16 +17,37 @@ class Anggota(models.Model):
         (u'anggota', u'anggota'),
         (u'pengurus', u'pengurus'),
     ]
+
+    STATUS_VERIFY = [
+        ('verify', 'verify'),
+        ('unverify', 'unverify'),
+    ]
+
+    TINGKAT = [
+        ('polos', 'polos'),
+        ('putih', 'putih'),
+        ('kuning', 'kuning'),
+        ('merah', 'merah'),
+    ]
+
+
     profile_pic = models.ImageField(upload_to='profile_pic', default="profile_pic/default.jpeg")
     nama = models.CharField(max_length=100)
     alamat = models.CharField(max_length=100)
     no_hp = models.CharField(max_length=100)
     status = models.CharField(choices=STATUS, max_length=40)
     jabatan = models.CharField(max_length=100, default="~", blank=True)
+    sertifikat = models.FileField(upload_to='sertifikat/')
+    validate = models.BooleanField(_("Validasi"), default=False)
+    tingkat = models.CharField(_("Tingkat"), choices=TINGKAT, max_length=50)
+    status_verify = models.CharField(_("Sattus Verifikasi"), choices=STATUS_VERIFY, max_length=50)
     
     def __str__(self):
         return self.nama
 
+    def avatar(self):
+        return format_html(f'<img src="{self.profile_pic.url}" width="100" height="100">')
+    
     def save(self):
         self.make_thumbnail()
         super(Anggota, self).save()
@@ -57,3 +82,6 @@ class Anggota(models.Model):
         temp_thumb.close()
 
         return True
+
+    class Meta:
+        verbose_name = "Anggota"
