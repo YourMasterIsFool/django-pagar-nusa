@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from anggota.models import Anggota
-from django.db.models import Sum
+from django.db.models import Sum, Count
+
+
 
 # Create your views here.
 
@@ -15,18 +17,10 @@ def data_anggota(request, status):
 
 
 def grafil_anggota(request):
-    labels = []
-    data = []
-    
-    queryset = Anggota.objects.values('tingkat__nama').annotate(name=Sum('name'))
-    for a in queryset:
-        labels.append(a['tingkat__nama'])
-        data.append(a['nama'])
-    
+    queryset = Anggota.objects.values('tingkat').annotate(the_count=Count('tingkat'))
+    data = [x['the_count'] for x in queryset]
     context = {
         'data':data,
+        'total':Anggota.objects.count()
     }
-
-    print(context)
-    
     return render(request, 'anggota/grafik.html', context)

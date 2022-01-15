@@ -5,7 +5,7 @@ from . import views
 
 
 urlpatterns = [
-    path("grafik", views.grafil_anggota, name="data-anggota"),
+    path("grafik", views.grafil_anggota, name="grafik-anggota"),
     path("<status>/", views.data_anggota, name="data-anggota")
 
 ]
