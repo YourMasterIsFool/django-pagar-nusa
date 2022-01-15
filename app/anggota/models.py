@@ -12,6 +12,16 @@ from django.utils.html import format_html
 
 # Create your models here.
 
+class Tingkat(models.Model):
+    name = models.CharField(_("Tingkat"), max_length=50)
+    
+    def __str__(self) -> str:
+        return self.name
+
+
+    class Meta:
+        verbose_name = "Tingkat"
+
 class Anggota(models.Model):
     STATUS = [
         (u'anggota', u'anggota'),
@@ -37,9 +47,9 @@ class Anggota(models.Model):
     no_hp = models.CharField(max_length=100)
     status = models.CharField(choices=STATUS, max_length=40)
     jabatan = models.CharField(max_length=100, default="~", blank=True)
-    sertifikat = models.FileField(upload_to='sertifikat/')
+    sertifikat = models.FileField(upload_to='sertifikat/', blank=True, null=True)
     validate = models.BooleanField(_("Validasi"), default=False)
-    tingkat = models.CharField(_("Tingkat"), choices=TINGKAT, max_length=50)
+    tingkat = models.ForeignKey(Tingkat, verbose_name=_("Tingkat"), on_delete=models.CASCADE)
     status_verify = models.CharField(_("Sattus Verifikasi"), choices=STATUS_VERIFY, max_length=50)
     
     def __str__(self):
