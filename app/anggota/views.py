@@ -19,8 +19,11 @@ def data_anggota(request, status):
 def grafil_anggota(request):
     queryset = Anggota.objects.values('tingkat').annotate(the_count=Count('tingkat'))
     data = [x['the_count'] for x in queryset]
+    label = [x['tingkat'] for x in queryset]
     context = {
         'data':data,
+        'label':label,
         'total':Anggota.objects.count()
     }
+    print(data)
     return render(request, 'anggota/grafik.html', context)
