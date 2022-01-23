@@ -27,6 +27,24 @@
             background-color: #2d5f0b;
             color: white;
         }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .polos {background-color: #02b32e;} /* Blue */
+        .putih {background-color: #ffffff;} /* Red */ 
+        .kuning {background-color: #fffb00; color: black;} /* Gray */ 
+        .merah {background-color: #ff0000;} /* Black */
+
     </style>
 {% endblock %}
 
@@ -67,13 +85,13 @@
                                         <td>{{data.jabatan}}</td>
                                         <td>
                                             {% if data.tingkat == 'polos' %}
-                                                <a class="btn btn-info" href="">{{ data.tingkat }}</a>
+                                                <a class="button polos" href="">{{ data.tingkat }}</a>
                                             {% elif data.tingkat == 'putih' %}
-                                                <a class="btn btn-default" href="">{{ data.tingkat }}</a>
+                                                <a class="button putih" href="">{{ data.tingkat }}</a>
                                             {% elif data.tingkat == 'kuning' %}
-                                                <a class="btn btn-warning" href="">{{ data.tingkat }}</a>
+                                                <a class="button kuning" href="">{{ data.tingkat }}</a>
                                             {% elif data.tingkat == 'merah' %}
-                                                <a class="btn btn-green" href="">{{ data.tingkat }}</a>
+                                                <a class="button merah" href="">{{ data.tingkat }}</a>
                                             {% endif %}
                                         </td>
                                     </tr>    

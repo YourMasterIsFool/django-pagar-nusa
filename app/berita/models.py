@@ -7,12 +7,16 @@ from PIL import Image
 import os.path
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django.utils.translation import gettext as _
 
 # Create your models here.
 class Kategory(models.Model):
     name = models.CharField(max_length=100)
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "Kategori"
     
 
 class StatusNews(models.Model):
@@ -75,6 +79,9 @@ class Berita(models.Model):
         temp_thumb.close()
 
         return True
+
+    class Meta:
+        verbose_name = _("Berita")
     
     
     
