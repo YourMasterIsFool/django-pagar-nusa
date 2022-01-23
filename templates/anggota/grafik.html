@@ -34,18 +34,14 @@
 <script>
     var ctx = document.getElementById("myChart").getContext("2d");
     var data = {{ data|safe }}
+    console.log({{ color|safe }})
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: {{ label|safe }},
-            datasets: [{
+            datasets: [{    
                 data :data,
-                backgroundColor: [
-                    'rgba(0,154,23)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255,255,0)',
-                    'rgba(255, 0, 0)',
-                ],
+                backgroundColor: {{ color|safe }},
                 borderWidth:1
             }]
         },
