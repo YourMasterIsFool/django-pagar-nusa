@@ -33,13 +33,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script>
     var ctx = document.getElementById("myChart").getContext("2d");
-    // var data = {{ data|safe }}
-    var data = [10,9,6,7]
-    console.log(data)
+    var data = {{ data|safe }}
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['polos','putih','kuning','merah'],
+            labels: {{ label|safe }},
             datasets: [{
                 data :data,
                 backgroundColor: [
