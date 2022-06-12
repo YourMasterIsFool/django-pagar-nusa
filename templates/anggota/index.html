@@ -70,6 +70,9 @@
                                         <th>Alamat</th>
                                         <th>No Hp</th>
                                         <th>Jabatan</th>
+                                        <th>Cabang</th>
+                                        <th>PAC</th>
+                                        <th>Ranting</th>
                                         <th>Tingkat</th>
                                     </tr>
                                     </thead>
@@ -83,6 +86,9 @@
                                         <td>{{data.alamat}}</td>
                                         <td>{{data.no_hp}}</td>
                                         <td>{{data.jabatan}}</td>
+                                        <td>{{data.cabang}}</td>
+                                        <td>{{data.ranting}}</td>
+                                        <td>{{data.pac}}</td>
                                         <td>
                                             {% if data.tingkat == 'polos' %}
                                                 <a class="button polos" href="">{{ data.tingkat }}</a>
@@ -115,9 +121,8 @@
 <script>
     $(document).ready(function(){
         var table = $("#example1").DataTable({
-            responsive: true
+            scrollX: true,
         });
-        new $.fn.dataTable.FixedHeader( table );
     });
 </script>
 {% endblock  %}
