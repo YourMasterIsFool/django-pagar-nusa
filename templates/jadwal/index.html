@@ -1,5 +1,4 @@
 
-
 {% extends 'layouts/main.html' %}
 {% load static %}
 {% block css %}
@@ -27,16 +26,16 @@
     .tooltip {
       position: absolute;
       z-index: 9999;
-      background: #FFC107;
-      color: black;
+      background: #07b0ff;
+      color: #07b0ff;
       width: 150px;
       border-radius: 3px;
-      box-shadow: 0 0 2px rgba(0,0,0,0.5);
+      box-shadow: 0 0 2px #07b0ff;
       padding: 10px;
       text-align: center;
     }
     .style5 .tooltip {
-      background: #1E252B;
+      background: #07b0ff;
       color: #FFFFFF;
       max-width: 200px;
       width: auto;
@@ -54,10 +53,10 @@
   
     .tooltip .tooltip-arrow,
     .popper .popper__arrow {
-      border-color: #FFC107;
+      border-color: #07b0ff;
     }
     .style5 .tooltip .tooltip-arrow {
-      border-color: #1E252B;
+      border-color: #07b0ff;
     }
     .popper[x-placement^="top"],
     .tooltip[x-placement^="top"] {
@@ -144,7 +143,6 @@
 {% endblock  %}
 
 {% block js %}
-    <script src='/assets/demo-to-codepen.js'></script>
     <script src='https://unpkg.com/popper.js/dist/umd/popper.min.js'></script>
     <script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script>
     <script src='https://unpkg.com/@fullcalendar/core@4.4.0/main.min.js'></script>
@@ -166,13 +164,13 @@
             navLinks: true, // can click day/week names to navigate views
             editable: true,
             eventLimit: true, // allow "more" link when too many events
+            
             eventRender: function(info) {
-                
                 var tooltip = new Tooltip(info.el, {
-                title: info.event.extendedProps.description,
-                placement: 'top',
-                trigger: 'hover',
-                container: 'body'
+                  title: info.event.extendedProps.description,
+                  placement: 'top',
+                  trigger: 'hover',
+                  container: 'body'
                 });
             },
 
