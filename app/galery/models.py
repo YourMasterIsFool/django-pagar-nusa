@@ -4,11 +4,16 @@ from PIL import Image as im
 import os.path
 from io import BytesIO
 from django.core.files.base import ContentFile
-
+from django.utils.translation import gettext as _
 # Create your models here.
 class Image(models.Model):
     title = models.CharField(max_length=120)
     image = models.ImageField(upload_to='gallery')
+
+        
+    class Meta:
+        verbose_name=_("Image")
+        verbose_name_plural = _("Image")
 
     def __str__(self):
         return self.title
@@ -26,7 +31,7 @@ class Image(models.Model):
         thumb_name, thumb_extension = os.path.splitext(self.image.name)
         thumb_extension = thumb_extension.lower()
 
-        thumb_filename = thumb_name + '_thumb' + thumb_extension
+        thumb_filename = f'{thumb_name}_thumb{thumb_extension}'
 
         if thumb_extension in ['.jpg', '.jpeg']:
             FTYPE = 'JPEG'
@@ -56,6 +61,9 @@ class Video(models.Model):
     youtube_id = models.CharField(max_length=122)
     url_video = models.URLField(max_length=1200)
 
+    class Meta:
+        verbose_name=_("Video")
+        verbose_name_plural = _("Video")
 
     def __str__(self):
         return self.title

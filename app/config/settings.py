@@ -117,8 +117,10 @@ DATABASES ={
    'default': {
        'ENGINE': 'django.db.backends.mysql',
        'USER': 'root',
-       'NAME':'django_pn',
-       'PASSWORD': 'keselyoleren',
+    #    'NAME':'pn_v2',
+    #    'PASSWORD': 'keselyoleren',
+       'NAME':'pagarnus_bwi',
+       'PASSWORD': '4A-nB~2inwBs',
        'HOST': 'localhost',
        'PORT': '3306',
        'CHARSET': 'utf8mb4',
@@ -188,3 +190,14 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Pagar Nusa",
+    "site_header": "Pagar Nusa",
+    "copyright": "Pagar Nusa",
+    # custom list sidebar
+    "navigation_expanded": False,
+    "order_with_respect_to": [
+        "auth",  
+    ],
+}

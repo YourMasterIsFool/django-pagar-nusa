@@ -11,6 +11,14 @@ from django.utils.translation import gettext as _
 from django.utils.html import format_html
 
 # Create your models here.
+TINGKAT = [
+    ('polos', 'polos'),
+    ('putih', 'putih'),
+    ('kuning', 'kuning'),
+    ('merah', 'merah'),
+]
+
+
 
 class Anggota(models.Model):
     STATUS = [
@@ -23,20 +31,15 @@ class Anggota(models.Model):
         ('unverify', 'unverify'),
     ]
 
-    TINGKAT = [
-        ('polos', 'polos'),
-        ('putih', 'putih'),
-        ('kuning', 'kuning'),
-        ('merah', 'merah'),
-    ]
-
-
     profile_pic = models.ImageField(upload_to='profile_pic', default="profile_pic/default.jpeg")
     nama = models.CharField(max_length=100)
     alamat = models.CharField(max_length=100)
     no_hp = models.CharField(max_length=100)
     status = models.CharField(choices=STATUS, max_length=40)
     jabatan = models.CharField(max_length=100, default="~", blank=True)
+    cabang = models.CharField(_("Cabang"), max_length=100)
+    pac = models.CharField(_("PAC"), max_length=100)
+    ranting = models.CharField(_("Ranting"), max_length=100)
     sertifikat = models.FileField(upload_to='sertifikat/', blank=True, null=True)
     validate = models.BooleanField(_("Validasi"), default=False)
     tingkat = models.CharField(_("Tingkat"), choices=TINGKAT, max_length=50)
@@ -61,7 +64,7 @@ class Anggota(models.Model):
         thumb_name, thumb_extension = os.path.splitext(self.profile_pic.name)
         thumb_extension = thumb_extension.lower()
 
-        thumb_filename = thumb_name + '_thumb' + thumb_extension
+        thumb_filename = f'{thumb_name}_thumb{thumb_extension}'
 
         if thumb_extension in ['.jpg', '.jpeg']:
             FTYPE = 'JPEG'
@@ -83,5 +86,30 @@ class Anggota(models.Model):
 
         return True
 
+    
     class Meta:
-        verbose_name = "Anggota"
+        verbose_name=_("Anggota")
+        verbose_name_plural = _("Anggota")
+
+class UjianKenaikanTingkat(models.Model):
+    HASIL = [('Lulus', 'Lulus'), ('Tidak Lulus', 'Tidak Lulus')]
+    anggota = models.ForeignKey(Anggota, verbose_name=_("Anggota"), on_delete=models.CASCADE)
+    unit_latihan = models.CharField(_("Unit Latihan"), max_length=50)
+    tingkat = models.CharField(_("Tingkat"), max_length=50, choices=TINGKAT)
+    hasil = models.CharField(_("Hasil"), max_length=50)
+
+    class Meta:
+        verbose_name=_("UKT")
+        verbose_name_plural = _("UKT")
+
+    def __str__(self) -> str:
+        return self.anggota.nama
+
+    def save(self):
+        super().save()
+        if self.hasil == 'Lulus':
+            anggota = Anggota.objects.get(id=self.anggota.id)
+            anggota.tingkat = self.tingkat
+            anggota.save()
+
+    

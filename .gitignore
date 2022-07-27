@@ -75,7 +75,7 @@ exports/
 
 
 # src/telelab/settings.py
-# settings.py
+settings.py
 
 
 # NPM
@@ -88,7 +88,7 @@ src/exports/
 server/
 
 # local settings
-src/telelab/settings.py
+app/config/settings.py
 
 # API directory
 # src/api/*/__init__.py
