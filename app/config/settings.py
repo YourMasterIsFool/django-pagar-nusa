@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'galery',
     'jadwal',
     'anggota',
+    'validasi'
+    
+
 ]
 
 
@@ -120,7 +123,7 @@ DATABASES ={
     #    'NAME':'pn_v2',
     #    'PASSWORD': 'keselyoleren',
        'NAME':'pagarnus_bwi',
-       'PASSWORD': '4A-nB~2inwBs',
+       # 'PASSWORD': '4A-nB~2inwBs',
        'HOST': 'localhost',
        'PORT': '3306',
        'CHARSET': 'utf8mb4',
@@ -198,6 +201,6 @@ JAZZMIN_SETTINGS = {
     # custom list sidebar
     "navigation_expanded": False,
     "order_with_respect_to": [
-        "auth",  
+        "auth", 'validasi'
     ],
 }

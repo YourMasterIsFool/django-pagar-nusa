@@ -31,6 +31,7 @@ class Anggota(models.Model):
         ('unverify', 'unverify'),
     ]
 
+    identity_pic = models.ImageField(upload_to='identity_pic', null=True)
     profile_pic = models.ImageField(upload_to='profile_pic', default="profile_pic/default.jpeg")
     nama = models.CharField(max_length=100)
     alamat = models.CharField(max_length=100)
@@ -44,7 +45,10 @@ class Anggota(models.Model):
     validate = models.BooleanField(_("Validasi"), default=False)
     tingkat = models.CharField(_("Tingkat"), choices=TINGKAT, max_length=50)
     status_verify = models.CharField(_("Sattus Verifikasi"), choices=STATUS_VERIFY, max_length=50)
-    
+
+    class Meta:
+        abstract = True
+
     def __str__(self):
         return self.nama
 

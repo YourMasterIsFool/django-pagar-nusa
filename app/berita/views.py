@@ -3,6 +3,7 @@ from berita.models import Berita
 # Create your views here.
 def index(request):
     berita = Berita.objects.order_by('-id')[0]
+    print(berita)
     context = {
         'data':berita
     }
