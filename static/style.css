@@ -1208,6 +1208,10 @@ textarea:focus {
       .contact-area .contact-title h2 {
         font-size: 30px; } }
 
+.table th {
+  min-width: 100px !important;
+}
+
   
 /*# sourceMappingURL=style.css.map */
 

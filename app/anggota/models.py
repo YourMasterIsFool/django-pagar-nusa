@@ -45,7 +45,7 @@ class Anggota(models.Model):
     validate = models.BooleanField(_("Validasi"), default=False)
     tingkat = models.CharField(_("Tingkat"), choices=TINGKAT, max_length=50)
     status_verify = models.CharField(_("Sattus Verifikasi"), choices=STATUS_VERIFY, max_length=50)
-
+    verifikasi = models.BooleanField(_("Verifikasi"), default=False)
     class Meta:
         abstract = True
 

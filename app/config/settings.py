@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'galery',
     'jadwal',
     'anggota',
-    'validasi'
+    'validasi',
+    'verifikasi'
     
 
 ]

@@ -9,7 +9,7 @@ from django.utils.html import format_html
 @admin.register(Anggota)
 class AnggotaAdmin(admin.ModelAdmin):
     list_display = [ 'avatar', 'nama', 'alamat', 'no_hp','jabatan', 'status',  'tingkat', 'status_verify']
-    exclude = ('validate',)
+    exclude = ('validate','status_verify','verifikasi')
     def get_queryset(self, request):
         qs = super(AnggotaAdmin, self).get_queryset(request)
         print(qs)        
