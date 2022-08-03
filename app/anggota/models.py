@@ -1,3 +1,4 @@
+from datetime import datetime
 from email.policy import default
 import venv
 from django.db import models
@@ -101,10 +102,10 @@ class UjianKenaikanTingkat(models.Model):
     unit_latihan = models.CharField(_("Unit Latihan"), max_length=50)
     tingkat = models.CharField(_("Tingkat"), max_length=50, choices=TINGKAT)
     hasil = models.CharField(_("Hasil"), max_length=50)
-
+    tanggal_ujian  = models.DateField(_("Tanggal Ujian"), null=False, default=datetime.now().today)
     class Meta:
-        verbose_name=_("UKT")
-        verbose_name_plural = _("UKT")
+        verbose_name=_("Ujian Kenaikan Tingkat")
+        verbose_name_plural = _("Ujian Kenaikan Tingkat")
 
     def __str__(self) -> str:
         return self.anggota.nama

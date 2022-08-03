@@ -33,6 +33,7 @@ def grafil_anggota(request):
     data = [x['the_count'] for x in queryset]
     label = [x['tingkat'] for x in queryset]
         
+    
     context = {
         'data':data,
         'label':label,
