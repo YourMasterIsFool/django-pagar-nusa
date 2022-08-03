@@ -17,6 +17,9 @@ TINGKAT = [
     ('putih', 'putih'),
     ('kuning', 'kuning'),
     ('merah', 'merah'),
+    ('biru', 'biru'),
+    ('coklat', 'coklat'),
+
 ]
 
 
