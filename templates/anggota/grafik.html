@@ -15,13 +15,39 @@
                 <div class="row">
                     <!-- Single Featured Post -->
                     <h3>Total Anggota {{ total }} <br><br><br></h3>
+                    
                     <div class="col-12 col-lg-12">
+                        <h1>
+                            Barchart
+                        </h1>
                         <canvas id="myChart"></canvas>
                     </div>                        
                 </div>
             </div>
-            {% include 'layouts/sidebar-news.html' %}
+
+
+            
         </div>
+
+        <div class="row mt-2 mb-4">
+            <div class="col-12 col-md-6 col-lg-8">
+                <div class="row">
+                  
+                    <!-- Single Featured Post -->
+                    <div class="col-12 col-lg-12">
+                        <h1>
+                            Line Chart
+                        </h1>
+                        <canvas id="line-chart"></canvas>
+                    </div>                        
+                </div>
+            </div>
+
+
+            
+        </div>
+
+        {% include 'layouts/sidebar-news.html' %}
     </div>
 </div><br>
 
@@ -33,13 +59,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script>
     var ctx = document.getElementById("myChart").getContext("2d");
+    var lineChartCanvas = document.getElementById('line-chart').getContext('2d');
     var data = {{ data|safe }}
     
+
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: {{ label|safe }},
             datasets: [{    
+                label: "grafik bar chart anggota",
                 data :data,
                 backgroundColor: {{ color|safe }},
                 borderWidth:1
@@ -54,6 +83,22 @@
             }
         }
     });
+
+
+    var lineChart = new Chart(lineChartCanvas, {
+        type: 'line',
+        data: {
+            labels: {{label|safe}},
+            datasets: [{
+                data: data,
+                label: 'grafik line chart anggota',
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            
+            }]
+        }
+    })
 </script>
 {% endblock  %}
     

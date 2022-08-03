@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 02, 2022 at 04:32 PM
+-- Generation Time: Aug 03, 2022 at 02:40 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -38,7 +38,7 @@ CREATE TABLE `anggota_anggota` (
   `sertifikat` varchar(200) DEFAULT NULL,
   `validate` tinyint(1) NOT NULL DEFAULT 0,
   `tingkat` varchar(100) NOT NULL,
-  `status_verify` varchar(100) NOT NULL,
+  `status_verify` varchar(50) NOT NULL,
   `cabang` varchar(100) NOT NULL,
   `pac` varchar(100) NOT NULL,
   `ranting` varchar(100) NOT NULL,
@@ -66,15 +66,16 @@ CREATE TABLE `anggota_ujiankenaikantingkat` (
   `unit_latihan` varchar(50) NOT NULL,
   `tingkat` varchar(50) NOT NULL,
   `hasil` varchar(50) NOT NULL,
-  `anggota_id` bigint(20) NOT NULL
+  `anggota_id` bigint(20) NOT NULL,
+  `tanggal_ujian` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `anggota_ujiankenaikantingkat`
 --
 
-INSERT INTO `anggota_ujiankenaikantingkat` (`id`, `unit_latihan`, `tingkat`, `hasil`, `anggota_id`) VALUES
-(1, 'An-Nawawi', 'kuning', 'Lulus', 31);
+INSERT INTO `anggota_ujiankenaikantingkat` (`id`, `unit_latihan`, `tingkat`, `hasil`, `anggota_id`, `tanggal_ujian`) VALUES
+(1, 'An-Nawawi', 'kuning', 'Lulus', 31, '2022-08-03');
 
 -- --------------------------------------------------------
 
@@ -229,7 +230,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (69, 'Can add Validasi', 18, 'add_anggotavalidasi'),
 (70, 'Can change Validasi', 18, 'change_anggotavalidasi'),
 (71, 'Can delete Validasi', 18, 'delete_anggotavalidasi'),
-(72, 'Can view Validasi', 18, 'view_anggotavalidasi');
+(72, 'Can view Validasi', 18, 'view_anggotavalidasi'),
+(73, 'Can add Verifikasi', 19, 'add_verifikasianggota'),
+(74, 'Can change Verifikasi', 19, 'change_verifikasianggota'),
+(75, 'Can delete Verifikasi', 19, 'delete_verifikasianggota'),
+(76, 'Can view Verifikasi', 19, 'view_verifikasianggota');
 
 -- --------------------------------------------------------
 
@@ -732,7 +737,19 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (78, 'validasi', '0001_initial', '2022-07-29 18:27:47.418906'),
 (79, 'validasi', '0002_alter_anggotavalidasi_options', '2022-07-29 18:27:47.423476'),
 (80, 'anggota', '0003_anggota_verifikasi', '2022-08-02 14:10:42.387357'),
-(81, 'anggota', '0004_alter_anggota_status_verify', '2022-08-02 14:12:46.958383');
+(81, 'anggota', '0004_alter_anggota_status_verify', '2022-08-02 14:12:46.958383'),
+(82, 'anggota', '0005_auto_20220803_0223', '2022-08-03 02:24:07.266398'),
+(83, 'verifikasi', '0001_initial', '2022-08-03 02:24:07.270481'),
+(84, 'anggota', '0006_alter_ujiankenaikantingkat_tanggal_ujian', '2022-08-03 12:24:09.769452'),
+(85, 'anggota', '0007_remove_ujiankenaikantingkat_tanggal_ujian', '2022-08-03 12:24:09.784660'),
+(86, 'anggota', '0008_ujiankenaikantingkat_tanggal_ujian', '2022-08-03 12:24:09.786102'),
+(87, 'jadwal', '0002_jadwal_tempat', '2022-08-03 12:24:09.787801'),
+(88, 'anggota', '0009_remove_ujiankenaikantingkat_tanggal_ujian', '2022-08-03 12:24:44.440076'),
+(89, 'anggota', '0010_ujiankenaikantingkat_tanggal_ujian', '2022-08-03 12:24:54.421575'),
+(90, 'jadwal', '0003_remove_jadwal_tempat', '2022-08-03 12:25:55.048820'),
+(91, 'jadwal', '0004_jadwal_tempat', '2022-08-03 12:25:55.052151'),
+(92, 'jadwal', '0005_remove_jadwal_tempat', '2022-08-03 12:25:55.057065'),
+(93, 'jadwal', '0006_jadwal_tempat', '2022-08-03 12:26:07.802059');
 
 -- --------------------------------------------------------
 
@@ -857,22 +874,23 @@ CREATE TABLE `jadwal_jadwal` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `start` date DEFAULT NULL,
-  `end` date DEFAULT NULL
+  `end` date DEFAULT NULL,
+  `tempat` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jadwal_jadwal`
 --
 
-INSERT INTO `jadwal_jadwal` (`id`, `title`, `start`, `end`) VALUES
-(1, 'Tanding bola', '2020-03-15', '2020-03-26'),
-(2, 'Latihan', '2020-03-20', NULL),
-(3, 'Separigan', '2020-03-15', '2020-03-15'),
-(4, 'sabong', '2020-03-15', NULL),
-(5, 'gladi resik', '2020-03-15', NULL),
-(6, 'Persiapan Kejurnas', '2020-03-15', NULL),
-(8, 'Pengesahan', '2022-02-24', '2022-02-24'),
-(9, 'Diklat Anggota', '2022-07-02', '2022-07-03');
+INSERT INTO `jadwal_jadwal` (`id`, `title`, `start`, `end`, `tempat`) VALUES
+(1, 'Tanding bola', '2020-03-15', '2020-03-26', NULL),
+(2, 'Latihan', '2020-03-20', NULL, NULL),
+(3, 'Separigan', '2020-03-15', '2020-03-15', NULL),
+(4, 'sabong', '2020-03-15', NULL, NULL),
+(5, 'gladi resik', '2020-03-15', NULL, NULL),
+(6, 'Persiapan Kejurnas', '2020-03-15', NULL, NULL),
+(8, 'Pengesahan', '2022-02-24', '2022-02-24', NULL),
+(9, 'Diklat Anggota', '2022-07-02', '2022-07-03', NULL);
 
 --
 -- Indexes for dumped tables
@@ -1050,7 +1068,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -1110,7 +1128,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `galery_image`

@@ -129,6 +129,56 @@
 <div class="featured-post-area">
     <div class="container">
         <div class="row">
+          <div class="col-12 col-md-6 col-lg-8">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <h1>
+                      Detail Jadwal
+                    </h1>
+                    <table>
+                      <thead>
+                        <th>
+                          No
+                        </th>
+                        <th>
+                          Kegiatan
+                        </th>
+                        <th>
+                          Tempat
+                        </th>
+                        <th>
+                          Tanggal
+                        </th>
+                      </thead>
+                      <tbody>
+                       
+                        {% for jadwal in listJadwal %}
+                            <tr>
+                              <td>
+                                {{forloop.counter}}
+                              </td>
+                              <td>
+                                {{jadwal.title}}
+                              </td>
+                              <td>
+                                {% if jadwal.tempat is None%}
+                                  -
+                                {% else %}
+                                    {{jadwal.tempat}}
+                                {% endif %}
+                              </td>
+                              <td>
+                                {{jadwal.start}} - {{jadwal.end}}
+                              </td>
+                              
+                              
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                </div>                        
+            </div>
+        </div>
             <div class="col-12 col-md-6 col-lg-8">
                 <div class="row">
                     <div class="col-12 col-lg-12">
@@ -140,6 +190,18 @@
         </div>
     </div>
 </div><br>
+
+<style lang="css">
+  table {
+    width: 100%;
+    border: 1px solid black;
+  }
+
+  table th, td {
+    border: 1px solid black;
+    padding: 10px 16px;
+  }
+</style>
 {% endblock  %}
 
 {% block js %}
