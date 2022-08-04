@@ -28,7 +28,7 @@ def grafil_anggota(request):
         elif a['tingkat'] == 'merah':
             color.append('rgba(255, 0, 0)')
         elif a['tingkat'] == 'biru':
-            color.append('rgba(0, 255, 0)')
+            color.append('rgba(0, 0, 255)')
         elif a['tingkat'] == 'coklat':
             color.append('rgba(165,42,42,1)')
     
