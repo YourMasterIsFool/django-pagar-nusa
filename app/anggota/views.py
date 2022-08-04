@@ -27,12 +27,17 @@ def grafil_anggota(request):
             color.append('rgba(255,255,0)')
         elif a['tingkat'] == 'merah':
             color.append('rgba(255, 0, 0)')
+        elif a['tingkat'] == 'biru':
+            color.append('rgba(0, 255, 0)')
+        elif a['tingkat'] == 'coklat':
+            color.append('rgba(165,42,42,1)')
     
     
     
     data = [x['the_count'] for x in queryset]
     label = [x['tingkat'] for x in queryset]
         
+    print(data)
     
     context = {
         'data':data,
