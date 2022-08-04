@@ -77,9 +77,11 @@
         options: {
             responsive: true,
             scales: {
-                y: {
-                    beginAtZero: true
-                }
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
             }
         }
     });
@@ -97,6 +99,15 @@
                 tension: 0.1
             
             }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
         }
     })
 </script>
