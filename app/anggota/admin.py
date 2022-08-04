@@ -13,10 +13,10 @@ class AnggotaAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(AnggotaAdmin, self).get_queryset(request)
         print(qs)        
-        return qs.filter(nama="test")
-        # if request.user.is_superuser:
-        #     return qs
-        # return qs.filter(author=request.user)
+        # return qs.filter(nama="test")
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(author=request.user)
     
     class Meta:
         model = Anggota
