@@ -16,7 +16,7 @@ def data_anggota(request, status):
 
 
 def grafil_anggota(request):
-    queryset = Anggota.objects.values('tingkat').annotate(the_count=Count('tingkat'))
+    queryset = Anggota.objects.all().values('tingkat').annotate(the_count=Count('tingkat')).order_by('the_count')
     color = []
     for a in queryset:
         if a['tingkat'] == 'polos':
@@ -37,6 +37,7 @@ def grafil_anggota(request):
     data = [x['the_count'] for x in queryset]
     label = [x['tingkat'] for x in queryset]
         
+
     print(data)
     
     context = {
