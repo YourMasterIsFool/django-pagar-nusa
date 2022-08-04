@@ -16,13 +16,24 @@ class AnggotaValidasi(Anggota):
 
 
 class AnggotaValidasiAdmin(AnggotaBase):
-	list_display = ('nama','get_validation',);
+	list_display = ('nama','get_validation','get_photo_ktp');
 
 	class Media: 
 
 		css = {
 			'all' : ('../../static/validasi_style.css')
 		}
+
+	def get_photo_ktp(self, obj):
+		if obj.identity_pic:
+			return format_html(f"""
+				<img src="/media/{obj.identity_pic}"  style="width:150px; height:150px"/>
+				""")
+
+		return format_html("""
+			<span>
+			- </span>
+			""")
 	def get_validation(self, obj):
 
 		if(obj.validate):
@@ -40,6 +51,7 @@ class AnggotaValidasiAdmin(AnggotaBase):
 
 
 	get_validation.short_description = 'validasi'
+	get_photo_ktp.short_description = "Photo KTP"
 
 	def has_add_permission(self, request, obj=None):
 	    return False
