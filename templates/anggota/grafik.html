@@ -15,12 +15,21 @@
                 <div class="row">
                     <!-- Single Featured Post -->
                     <h3>Total Anggota {{ total }} <br><br><br></h3>
+                 
                     
                     <div class="col-12 col-lg-12">
-                        <h1>
-                            Barchart
-                        </h1>
-                        <canvas id="myChart"></canvas>
+                      
+                            <h1>
+                                Barchart
+                            </h1>
+                            <a download id="download-barchart" class="btn btn-primary" onclick="barchartPdf()">
+                                download bar chart
+                            </a>
+                        
+                        
+                        <canvas 
+                            
+                        id="myChart"></canvas>
                     </div>                        
                 </div>
             </div>
@@ -38,6 +47,9 @@
                         <h1>
                             Line Chart
                         </h1>
+                        <a download id="download-linechart" class="btn btn-primary">
+                            download line chart
+                        </a>
                         <canvas id="line-chart"></canvas>
                     </div>                        
                 </div>
@@ -61,8 +73,32 @@
     var ctx = document.getElementById("myChart").getContext("2d");
     var lineChartCanvas = document.getElementById('line-chart').getContext('2d');
     var data = {{ data|safe }}
-    
+    var barChartImage;
 
+    function barchartPdf() {
+    //  html2canvas(document.getElementById("myChart"), {
+    //   onrendered: function(canvas) {
+    //      var img = canvas.toDataURL(); //image data of canvas
+    //      var doc = new jsPDF();
+    //      doc.addImage(img, 15, 15, 150, 150);
+    //      doc.save('test.pdf');
+    //   }
+//    });
+var a = document.createElement("a"); //Create <a>
+a.href = "data:image/png;base64," + barChartImage; //Image Base64 Goes here
+a.download = "Image.png"; //File name Here
+a.click();
+        
+    }
+
+    var backgroundColor = 'white';
+Chart.plugins.register({
+    beforeDraw: function(c) {
+        var ctx = c.chart.ctx;
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(0, 0, c.chart.width, c.chart.height);
+    }
+});
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -76,6 +112,9 @@
         },
         options: {
             responsive: true,
+            animation: {
+                onComplete: barchartDownloadPdf
+            },
             scales: {
                 yAxes: [{
                     ticks: {
@@ -86,6 +125,13 @@
         }
     });
 
+
+
+    function barchartDownloadPdf() {
+        barChartImage = myChart.toBase64Image()
+
+        document.getElementById('download-barchart').href =""+myChart.toBase64Image()
+    }
 
     var lineChart = new Chart(lineChartCanvas, {
         type: 'line',
@@ -107,9 +153,19 @@
                         beginAtZero:true
                     }
                 }]
-            }
+            },
+            animation: {
+                onComplete: lineChartDownload
+            },
         }
     })
+
+    function lineChartDownload() {
+    
+
+        document.getElementById('download-linechart').href =""+lineChart.toBase64Image()
+    }
+
 </script>
 {% endblock  %}
     
