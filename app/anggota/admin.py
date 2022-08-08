@@ -45,7 +45,7 @@ class AnggotaAdmin(admin.ModelAdmin):
 @admin.register(UjianKenaikanTingkat)
 class UKTAdminView(admin.ModelAdmin):
     list_display = ['photo', 'nama', 'alamat',
-        'unit_latihan','tingkat', 'hasil'
+        'unit_latihan','tingkat', 'hasil', 'tanggal_ujian'
     ]
 
     def photo(self, obj):
