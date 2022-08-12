@@ -96,8 +96,8 @@ class Anggota(models.Model):
 
     
     class Meta:
-        verbose_name=_("Santri")
-        verbose_name_plural = _("Santri")
+        verbose_name=_("Anggota")
+        verbose_name_plural = _("Anggota")
 
 class UjianKenaikanTingkat(models.Model):
     HASIL = [('Lulus', 'Lulus'), ('Tidak Lulus', 'Tidak Lulus')]

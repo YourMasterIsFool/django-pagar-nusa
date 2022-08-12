@@ -15,7 +15,7 @@ class VerifikasiAnggota(Anggota):
 
 
 class VerikasiAnggotaAdmin(admin.ModelAdmin):
-	list_display = ('nama', 'get_verifikasi')
+	list_display = ('nama', 'get_verifikasi', 'get_photo_ktp')
 	exclude = ('status_verify',)
 
 	def get_verifikasi(self, obj):
@@ -32,7 +32,17 @@ class VerikasiAnggotaAdmin(admin.ModelAdmin):
 					Belum Terverifikasi
 				</span>
 		 """)
+	def get_photo_ktp(self, obj):
+		if obj.identity_pic:
+			return format_html(f"""
+				<img src="/media/{obj.identity_pic}"  style="width:150px; height:150px"/>
+				""")
 
+		return format_html("""
+			<span>
+			- </span>
+			""")
+	get_photo_ktp.short_description = "Foto KTP"
 
 	get_verifikasi.short_description = 'Verifikasi Anggota'
 
