@@ -35,8 +35,8 @@ class Anggota(models.Model):
         ('unverify', 'unverify'),
     ]
 
-    identity_pic = models.ImageField(upload_to='identity_pic', null=True)
-    profile_pic = models.ImageField(upload_to='profile_pic', default="profile_pic/default.jpeg")
+    identity_pic = models.ImageField(upload_to='identity_pic', null=True, verbose_name=_("Foto KTP/KK"))
+    profile_pic = models.ImageField(upload_to='profile_pic', default="profile_pic/default.jpeg", verbose_name="Foto Diri")
     nama = models.CharField(max_length=100)
     alamat = models.CharField(max_length=100)
     no_hp = models.CharField(max_length=100)
@@ -96,8 +96,8 @@ class Anggota(models.Model):
 
     
     class Meta:
-        verbose_name=_("Anggota")
-        verbose_name_plural = _("Anggota")
+        verbose_name=_("Santri")
+        verbose_name_plural = _("Santri")
 
 class UjianKenaikanTingkat(models.Model):
     HASIL = [('Lulus', 'Lulus'), ('Tidak Lulus', 'Tidak Lulus')]
