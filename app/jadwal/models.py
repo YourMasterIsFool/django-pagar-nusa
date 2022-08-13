@@ -4,9 +4,9 @@ from django.utils.translation import gettext as _
 
 # Create your models here.
 class Jadwal(models.Model):
-    title = models.CharField(max_length=255)
-    start = models.DateField(blank=True, null=True)
-    end = models.DateField(blank=True, null=True)
+    title = models.CharField(max_length=255, verbose_name="Judul")
+    start = models.DateField(blank=True, null=True, verbose_name="Mulai")
+    end = models.DateField(blank=True, null=True, verbose_name="Akhir")
     tempat = models.TextField(blank=True, null=True)
 
 

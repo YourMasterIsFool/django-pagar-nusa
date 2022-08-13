@@ -7,8 +7,8 @@ from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
 # Create your models here.
 class Image(models.Model):
-    title = models.CharField(max_length=120)
-    image = models.ImageField(upload_to='gallery')
+    title = models.CharField(max_length=120, verbose_name=_("Judul"))
+    image = models.ImageField(upload_to='gallery', verbose_name=_("gambar"))
 
         
     class Meta:
@@ -57,9 +57,9 @@ class Image(models.Model):
     
     
 class Video(models.Model):
-    title = models.CharField(max_length=100)
-    youtube_id = models.CharField(max_length=122)
-    url_video = models.URLField(max_length=1200)
+    title = models.CharField(max_length=100, verbose_name=_("Judul"))
+    youtube_id = models.CharField(max_length=122, verbose_name=_("Nama Youtube"))
+    url_video = models.URLField(max_length=1200, verbose_name=_("Link Video"))
 
     class Meta:
         verbose_name=_("Video")

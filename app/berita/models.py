@@ -35,11 +35,11 @@ class StatusNews(models.Model):
 
 
 class Berita(models.Model):
-    title = models.CharField(max_length=225)
+    title = models.CharField(max_length=225, verbose_name = _("Judul"))
     kategori = models.ManyToManyField(Kategory, related_name="kategori")
-    thumbnail = models.ImageField(upload_to='thumbnail')
+    thumbnail = models.ImageField(upload_to='thumbnail', verbose_name=_("Gambar Kecil"))
     body = RichTextUploadingField(blank=True, null=True,
-                                      config_name='default',
+                                      config_name='default', verbose_name=_("Teks Berita")
                                     )    
     slug = models.SlugField(max_length=225, editable=False)
     created_at = models.DateField(auto_now_add=True)    
