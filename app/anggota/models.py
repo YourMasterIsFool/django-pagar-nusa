@@ -25,6 +25,7 @@ TINGKAT = [
 
 
 
+# anggota
 class Anggota(models.Model):
     STATUS = [
         (u'anggota', u'anggota'),
@@ -35,6 +36,8 @@ class Anggota(models.Model):
         ('verify', 'verify'),
         ('unverify', 'unverify'),
     ]
+
+
 
     identity_pic = models.ImageField(upload_to='identity_pic', null=True, verbose_name=_("Foto KTP/KK"))
     profile_pic = models.ImageField(upload_to='profile_pic', default="profile_pic/default.jpeg", verbose_name="Foto Diri")
