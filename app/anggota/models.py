@@ -10,6 +10,7 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
 from django.utils.html import format_html
+from django.contrib.auth.models import User
 
 # Create your models here.
 TINGKAT = [
@@ -50,6 +51,7 @@ class Anggota(models.Model):
     tingkat = models.CharField(_("Tingkat"), choices=TINGKAT, max_length=50)
     status_verify = models.CharField(_("Sattus Verifikasi"), choices=STATUS_VERIFY, max_length=50)
     verifikasi = models.BooleanField(_("Verifikasi"), default=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     class Meta:
         abstract = True
 
