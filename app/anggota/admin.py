@@ -9,7 +9,7 @@ from django.utils.html import format_html
 @admin.register(Anggota)
 class AnggotaAdmin(admin.ModelAdmin):
     list_display = [ 'avatar', 'nama', 'alamat', 'no_hp','jabatan', 'status',  'tingkat', 'get_verifikasi']
-    exclude = ('validate','status_verify','verifikasi')
+    exclude = ('validate','status_verify','verifikasi', 'author')
 
     def get_verifikasi(self, obj):
 
