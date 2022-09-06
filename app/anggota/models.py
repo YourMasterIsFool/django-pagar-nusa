@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 TINGKAT = [
-    ('polos', 'polos'),
+    ('polos', format_html('<div>hah</div>')),
     ('putih', 'putih'),
     ('kuning', 'kuning'),
     ('merah', 'merah'),
@@ -22,7 +22,6 @@ TINGKAT = [
     ('coklat', 'coklat'),
 
 ]
-
 
 
 # anggota
@@ -37,10 +36,10 @@ class Anggota(models.Model):
         ('unverify', 'unverify'),
     ]
 
-
-
-    identity_pic = models.ImageField(upload_to='identity_pic', null=True, verbose_name=_("Foto KTP/KK"))
-    profile_pic = models.ImageField(upload_to='profile_pic', default="profile_pic/default.jpeg", verbose_name="Foto Diri")
+    identity_pic = models.ImageField(
+        upload_to='identity_pic', null=True, verbose_name=_("Foto KTP/KK"))
+    profile_pic = models.ImageField(
+        upload_to='profile_pic', default="profile_pic/default.jpeg", verbose_name="Foto Diri")
     nama = models.CharField(max_length=100)
     alamat = models.CharField(max_length=100)
     no_hp = models.CharField(max_length=100)
@@ -49,12 +48,15 @@ class Anggota(models.Model):
     cabang = models.CharField(_("Cabang"), max_length=100)
     pac = models.CharField(_("PAC"), max_length=100)
     ranting = models.CharField(_("Ranting"), max_length=100)
-    sertifikat = models.FileField(upload_to='sertifikat/', blank=True, null=True)
+    sertifikat = models.FileField(
+        upload_to='sertifikat/', blank=True, null=True)
     validate = models.BooleanField(_("Validasi"), default=False)
     tingkat = models.CharField(_("Tingkat"), choices=TINGKAT, max_length=50)
-    status_verify = models.CharField(_("Sattus Verifikasi"), choices=STATUS_VERIFY, max_length=50)
+    status_verify = models.CharField(
+        _("Sattus Verifikasi"), choices=STATUS_VERIFY, max_length=50)
     verifikasi = models.BooleanField(_("Verifikasi"), default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
     class Meta:
         abstract = True
 
@@ -63,7 +65,7 @@ class Anggota(models.Model):
 
     def avatar(self):
         return format_html(f'<img src="{self.profile_pic.url}" width="100" height="100">')
-    
+
     def save(self):
         self.make_thumbnail()
         super(Anggota, self).save()
@@ -94,25 +96,29 @@ class Anggota(models.Model):
         temp_thumb.seek(0)
 
         # set save=False, otherwise it will run in an infinite loop
-        self.profile_pic.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
+        self.profile_pic.save(thumb_filename, ContentFile(
+            temp_thumb.read()), save=False)
         temp_thumb.close()
 
         return True
 
-    
     class Meta:
-        verbose_name=_("Anggota")
+        verbose_name = _("Anggota")
         verbose_name_plural = _("Anggota")
+
 
 class UjianKenaikanTingkat(models.Model):
     HASIL = [('Lulus', 'Lulus'), ('Tidak Lulus', 'Tidak Lulus')]
-    anggota = models.ForeignKey(Anggota, verbose_name=_("Anggota"), on_delete=models.CASCADE)
+    anggota = models.ForeignKey(Anggota, verbose_name=_(
+        "Anggota"), on_delete=models.CASCADE)
     unit_latihan = models.CharField(_("Unit Latihan"), max_length=50)
     tingkat = models.CharField(_("Tingkat"), max_length=50, choices=TINGKAT)
     hasil = models.CharField(_("Hasil"), max_length=50)
-    tanggal_ujian  = models.DateField(_("Tanggal Ujian"), null=False, default=datetime.now().today)
+    tanggal_ujian = models.DateField(
+        _("Tanggal Ujian"), null=False, default=datetime.now().today)
+
     class Meta:
-        verbose_name=_("Ujian Kenaikan Tingkat")
+        verbose_name = _("Ujian Kenaikan Tingkat")
         verbose_name_plural = _("Ujian Kenaikan Tingkat")
 
     def __str__(self) -> str:
@@ -124,5 +130,3 @@ class UjianKenaikanTingkat(models.Model):
             anggota = Anggota.objects.get(id=self.anggota.id)
             anggota.tingkat = self.tingkat
             anggota.save()
-
-    
