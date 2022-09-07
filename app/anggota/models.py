@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 TINGKAT = [
-    ('polos', format_html('<div>hah</div>')),
+    ('polos', 'polod'),
     ('putih', 'putih'),
     ('kuning', 'kuning'),
     ('merah', 'merah'),
