@@ -16,7 +16,7 @@ class VerifikasiAnggota(Anggota):
 
 class VerikasiAnggotaAdmin(admin.ModelAdmin):
 	list_display = ('nama', 'get_verifikasi', 'get_photo_ktp')
-	exclude = ('status_verify',)
+	exclude = ('status_verify', 'validate')
 
 	def get_verifikasi(self, obj):
 
