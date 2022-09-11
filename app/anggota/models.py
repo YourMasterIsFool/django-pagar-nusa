@@ -1,5 +1,6 @@
 from datetime import datetime
 from email.policy import default
+from subprocess import check_output
 import venv
 from django.db import models
 
@@ -21,6 +22,39 @@ TINGKAT = [
     ('biru', 'biru'),
     ('coklat', 'coklat'),
 
+]
+
+
+RANTING = [
+    ('kaliploso', 'kaliploso'),
+    ('genteng', 'genteng'),
+    ('sraten', 'sraten'),
+    ('rogojampi', 'rogojampi'),
+    ('kradenan', 'kradenan'),
+    ('tapanrejo', 'tapanrejo'),
+    ('sumberbaru', 'sumberbaru'),
+    ('kepundung', 'kepundung'),
+    ('alasmalang', 'alasmalang'),
+    ('kalibaru kulon', 'kalibaru kulon'),
+    ('setail', 'setail'),
+    ('singolatren', 'singolatren'),
+    ('balak', 'balak'),
+    ('sukonatar', 'sukonatar'),
+    ('kaliboyo', 'kaliboyo'),
+
+]
+
+PAC = [
+    ('rogojampi', 'rogojampi'),
+    ('cluring', 'cluring'),
+    ('gambiran', 'gambiran'),
+    ('muncar', 'muncar'),
+    ('srono', 'srono'),
+    ('purwoharjo', 'purwoharjo'),
+    ('Singojuruh', 'Singojuruh'),
+    ('Kalibaru', 'Kalibaru'),
+    ('genteng', 'genteng'),
+    ('songgon', 'songgon')
 ]
 
 
@@ -46,8 +80,8 @@ class Anggota(models.Model):
     status = models.CharField(choices=STATUS, max_length=40)
     jabatan = models.CharField(max_length=100, default="~", blank=True)
     cabang = models.CharField(_("Cabang"), max_length=100)
-    pac = models.CharField(_("PAC"), max_length=100)
-    ranting = models.CharField(_("Ranting"), max_length=100)
+    pac = models.CharField(_("PAC"), max_length=100, choices=PAC)
+    ranting = models.CharField(_("Ranting"), choices=RANTING, max_length=100)
     sertifikat = models.FileField(
         upload_to='sertifikat/', blank=True, null=True)
     validate = models.BooleanField(_("Validasi"), default=False)
