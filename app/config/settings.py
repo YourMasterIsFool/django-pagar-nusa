@@ -10,14 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+import pymysql
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-import pymysql
 
 pymysql.install_as_MySQLdb()
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -33,7 +32,6 @@ ALLOWED_HOSTS = []
 THUMBNAIL_FORCE_OVERWRITE = True
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,19 +45,19 @@ INSTALLED_APPS = [
     'berita',
     'ckeditor_uploader',
     'ckeditor',
-    'rest_framework', 
+    'rest_framework',
     'rest_framework.authtoken',
     'galery',
     'jadwal',
     'anggota',
     'verifikasi',
-  
+    'import_export',
+
     'pac',
     'ranting'
-    
+
 
 ]
-
 
 
 MIDDLEWARE = [
@@ -100,7 +98,7 @@ REST_FRAMEWORK = {
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 
-     'DEFAULT_RENDERER_CLASSES': [
+    'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
@@ -114,26 +112,24 @@ REST_FRAMEWORK = {
 }
 
 
-
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES ={
-   'default': {
-       'ENGINE': 'django.db.backends.mysql',
-       'USER': 'root',
-    #    'NAME':'pn_v2',
-    #    'PASSWORD': 'keselyoleren',
-       'NAME':'pagarnus_bwi',
-       # 'PASSWORD': '4A-nB~2inwBs',
-       'HOST': 'localhost',
-       'PORT': '3306',
-       'CHARSET': 'utf8mb4',
-       'COLLATION': 'utf8mb4_unicode_ci',
-       'OPTIONS': {
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'root',
+        #    'NAME':'pn_v2',
+        #    'PASSWORD': 'keselyoleren',
+        'NAME': 'pagarnus_bwi',
+        # 'PASSWORD': '4A-nB~2inwBs',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'CHARSET': 'utf8mb4',
+        'COLLATION': 'utf8mb4_unicode_ci',
+        'OPTIONS': {
             'charset': 'utf8mb4',
-            'use_unicode': True, 
+            'use_unicode': True,
             'sql_mode': 'traditional',
         },
     }
@@ -159,16 +155,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
- 
+
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = "pillow"
- 
+
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': None,
     },
 }
- 
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
