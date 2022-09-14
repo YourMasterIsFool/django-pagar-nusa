@@ -1,11 +1,58 @@
+from secrets import choice
 from django.contrib import admin
 from anggota.models import Anggota
 from anggota.models import UjianKenaikanTingkat
 from django.utils.html import format_html
 # Register your models here.
+from django import forms
 
 from import_export.admin import ExportMixin, ImportExportModelAdmin
 from import_export import resources
+
+
+from anggota.models import TINGKAT
+# Register your models here.
+
+
+class FontSelect(forms.Select):
+    def __init__(self, *args, **kwargs):
+        self.src = kwargs.pop('src', {})
+        super().__init__(*args, **kwargs)
+
+    def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
+        option = super(FontSelect, self).create_option(
+            name, value, label, selected, index, subindex=None, attrs=None)
+
+        if option['value'] == 'polos':
+            option['attrs']['style'] = "background-color:transparent; color:black !important;"
+
+        elif option['value'] == 'putih':
+            option['attrs']['style'] = "background-color:white"
+
+        elif option['value'] == 'kuning':
+            option['attrs']['style'] = "background-color:yellow; color: white !important;"
+
+        elif option['value'] == 'merah':
+            option['attrs']['style'] = "background-color:red"
+
+        return option
+
+
+class AnggotaForm(forms.ModelForm):
+    class Meta:
+        model = Anggota
+        fields = "__all__"
+
+        widgets = {
+            'tingkat': FontSelect
+        }
+    # def __init__(self, *args, **kwargs):
+    #     src = kwargs.pop('src', {})
+    #     choices = kwargs.pop('src', {})
+    #     super(AnggotaForm, self).__init__(*args, **kwargs)
+
+    #     self.fields['tingkat'].widget = FontSelect(
+    #         attrs={'class': 'some-class'}, choices=choices, src=src)
 
 
 class AnggotaResource(resources.ModelResource):
@@ -23,6 +70,8 @@ class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
 
     list_filter = ['nama', 'alamat', 'no_hp',
                    'jabatan', 'status',  'tingkat', 'verifikasi']
+
+    form = AnggotaForm
 
     def get_verifikasi(self, obj):
 
