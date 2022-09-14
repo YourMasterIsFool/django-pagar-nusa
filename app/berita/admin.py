@@ -3,7 +3,7 @@ from dataclasses import field
 from import_export import resources
 from django.contrib import admin
 from berita.models import Kategory, Berita, StatusNews
-from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ImportExportModelAdmin, ExportMixin
 # Register your models here.
 
 
@@ -18,7 +18,7 @@ class CategoryResources(resources.ModelResource):
         fields = ('name',)
 
 
-class CategoryCustomAdmin(ImportExportModelAdmin):
+class CategoryCustomAdmin(ExportMixin, admin.ModelAdmin):
     list_filter = ('name',)
     resource_class = Kategory
 
@@ -34,7 +34,7 @@ class BeritaResource(resources.ModelResource):
         fields = ('name',)
 
 
-class BeritaCustomAdmin(ImportExportModelAdmin):
+class BeritaCustomAdmin(ExportMixin, admin.ModelAdmin):
     list_filter = ['title', 'thumbnail', 'body', 'created_at', 'penulis']
 
     resource_class = Berita
@@ -55,7 +55,7 @@ class StatusBeritaResources(resources.ModelResource):
         fields = ('status',)
 
 
-class StatusCustomBeritaAdmin(ImportExportModelAdmin):
+class StatusCustomBeritaAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ['status']
     list_filter = ['status']
     resource_class = StatusNews

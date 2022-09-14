@@ -4,7 +4,7 @@ from anggota.models import UjianKenaikanTingkat
 from django.utils.html import format_html
 # Register your models here.
 
-from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ExportMixin, ImportExportModelAdmin
 from import_export import resources
 
 
@@ -16,7 +16,7 @@ class AnggotaResource(resources.ModelResource):
                   'jabatan', 'status',  'tingkat', 'get_verifikasi']
 
 
-class AnggotaAdmin(ImportExportModelAdmin):
+class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ['avatar', 'nama', 'alamat', 'no_hp',
                     'jabatan', 'status',  'tingkat', 'get_verifikasi']
     exclude = ('validate', 'status_verify', 'author', 'verifikasi')
@@ -124,7 +124,7 @@ class UKTResources(resources.ModelResource):
             return obj.anggota.alamat
 
 
-class UKTAdmin(ImportExportModelAdmin):
+class UKTAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ['photo', 'nama', 'alamat',
                     'unit_latihan', 'tingkat', 'hasil', 'tanggal_ujian'
                     ]
