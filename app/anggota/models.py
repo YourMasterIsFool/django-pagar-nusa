@@ -1,4 +1,5 @@
 from datetime import datetime
+from distutils.command.upload import upload
 from email.policy import default
 from subprocess import check_output
 import venv
@@ -90,6 +91,7 @@ class Anggota(models.Model):
         _("Sattus Verifikasi"), choices=STATUS_VERIFY, max_length=50)
     verifikasi = models.BooleanField(_("Verifikasi"), default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    active_status = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
@@ -164,3 +166,15 @@ class UjianKenaikanTingkat(models.Model):
             anggota = Anggota.objects.get(id=self.anggota.id)
             anggota.tingkat = self.tingkat
             anggota.save()
+
+
+class CertificateImage(models.Model):
+    image = models.ImageField(
+        upload_to="certificate_image/", blank=True, null=True)
+
+    tingkat = models.CharField(max_length=100, null=True)
+    anggota = models.ForeignKey(
+        Anggota, related_name='certificate_image', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Sertifikat Anggota'

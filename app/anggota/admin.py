@@ -2,6 +2,8 @@ from secrets import choice
 from django.contrib import admin
 from anggota.models import Anggota
 from anggota.models import UjianKenaikanTingkat
+from anggota.models import CertificateImage
+
 from django.utils.html import format_html
 # Register your models here.
 from django import forms
@@ -63,14 +65,20 @@ class AnggotaResource(resources.ModelResource):
                   'jabatan', 'status',  'tingkat', 'get_verifikasi']
 
 
+class CertificateAdmin(admin.StackedInline):
+    model = CertificateImage
+    exclude = ('tingkat',)
+
+
 class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ['avatar', 'nama', 'alamat', 'no_hp',
-                    'jabatan', 'status',  'tingkat', 'get_verifikasi']
-    exclude = ('validate', 'status_verify', 'author', 'verifikasi')
+                    'jabatan', 'status',  'tingkat', 'get_verifikasi', 'active_status', 'nomor_anggota']
+    exclude = ('validate', 'status_verify',
+               'author', 'verifikasi', 'sertifikat')
 
     list_filter = ['nama', 'alamat', 'no_hp',
                    'jabatan', 'status',  'tingkat', 'verifikasi']
-
+    inlines = [CertificateAdmin]
     form = AnggotaForm
 
     def get_verifikasi(self, obj):
@@ -89,6 +97,13 @@ class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
          """)
 
     get_verifikasi.short_description = 'Verifikasi Anggota'
+
+    def nomor_anggota(self, obj):
+        return format(f"""
+            {obj.id}
+        """)
+
+    nomor_anggota.short_description = "Nomor Anggota"
 
     def get_queryset(self, request):
         qs = super(AnggotaAdmin, self).get_queryset(request)
