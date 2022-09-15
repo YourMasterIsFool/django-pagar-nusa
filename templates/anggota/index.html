@@ -44,6 +44,8 @@
         .putih {background-color: #ffffff;} /* Red */ 
         .kuning {background-color: #fffb00; color: black;} /* Gray */ 
         .merah {background-color: #ff0000;} /* Black */
+        .coklat {background-color: #ad592d;} /* Black */
+        .biru {background-color: #0000ff;} /* Black */
 
     </style>
 {% endblock %}
@@ -55,7 +57,7 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-8">
                 <div class="row">
-                    
+
                     <!-- Single Featured Post -->
                     <div class="col-12 col-lg-12">
                          <div class="box">
@@ -98,6 +100,10 @@
                                                 <a class="button kuning" href="">{{ data.tingkat }}</a>
                                             {% elif data.tingkat == 'merah' %}
                                                 <a class="button merah" href="">{{ data.tingkat }}</a>
+                                            {% elif data.tingkat == 'coklat' %}
+                                                <a class="button coklat" href="">{{ data.tingkat }}</a>
+                                            {% elif data.tingkat == 'biru' %}
+                                                <a class="button biru" href="">{{ data.tingkat }}</a>
                                             {% endif %}
                                         </td>
                                     </tr>    
