@@ -100,10 +100,10 @@ class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
 
     def nomor_anggota(self, obj):
         return format(f"""
-            {obj.id}
+            {obj.nomor_anggota}
         """)
 
-    nomor_anggota.short_description = "Nomor Anggota"
+    nomor_anggota.short_description = "Nomor Anggota(NIA)"
 
     def get_queryset(self, request):
         qs = super(AnggotaAdmin, self).get_queryset(request)

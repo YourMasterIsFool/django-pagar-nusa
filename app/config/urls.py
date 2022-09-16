@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin-panel/', admin.site.urls, name='admin'),
     path("", include('berita.urls'), name="home"),
     path("galery/", include('galery.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),     
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path("api/", include('api.urls'), name="api"),
     path("jadwal", include('jadwal.urls')),
     path("database/", include('anggota.urls')),
@@ -18,4 +18,5 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

@@ -92,6 +92,8 @@ class Anggota(models.Model):
     verifikasi = models.BooleanField(_("Verifikasi"), default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     active_status = models.BooleanField(default=False)
+    nomor_anggota = models.CharField(
+        max_length=100, null=False, default='', verbose_name='NIA')
 
     class Meta:
         abstract = True
