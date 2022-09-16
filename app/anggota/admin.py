@@ -72,7 +72,7 @@ class CertificateAdmin(admin.StackedInline):
 
 class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ['avatar', 'nama', 'alamat', 'no_hp',
-                    'jabatan', 'status',  'tingkat', 'get_verifikasi', 'active_status', 'nomor_anggota']
+                    'jabatan', 'status',  'tingkat', 'get_verifikasi', 'active_status', 'get_nomor_anggota']
     exclude = ('validate', 'status_verify',
                'author', 'verifikasi', 'sertifikat')
 
@@ -98,12 +98,12 @@ class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
 
     get_verifikasi.short_description = 'Verifikasi Anggota'
 
-    def nomor_anggota(self, obj):
+    def get_nomor_anggota(self, obj):
         return format(f"""
-            {obj.id}
+            {obj.nomor_anggota}
         """)
 
-    nomor_anggota.short_description = "Nomor Anggota"
+    get_nomor_anggota.short_description = "Nomor Anggota(NIA)"
 
     def get_queryset(self, request):
         qs = super(AnggotaAdmin, self).get_queryset(request)
