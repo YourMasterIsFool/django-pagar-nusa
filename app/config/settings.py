@@ -36,8 +36,8 @@ THUMBNAIL_FORCE_OVERWRITE = True
 
 INSTALLED_APPS = [
     'jazzmin',
-    'django.contrib.admin',
-    # 'custom_admin.apps.MyAdminConfig',
+    # 'django.contrib.admin',
+    'custom_admin.apps.MyAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
