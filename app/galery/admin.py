@@ -4,6 +4,8 @@ from galery.models import Image, Video
 from import_export.admin import ImportExportModelAdmin, ExportMixin
 from import_export import resources
 
+from import_export.formats import base_formats
+
 
 # @admin.register(Image)
 # class ImageAdmin(admin.ModelAdmin):
@@ -18,6 +20,15 @@ class ImageResources(resources.ModelResource):
 class ImageAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ['title', 'image']
     list_filter = ['title', 'image']
+
+    def get_export_formats(self):
+        formats = (
+             base_formats.HTML,
+             base_formats.XLS,
+             base_formats.XLSX,
+        )
+
+        return [f for f in formats if f().can_export()]
 
     resource_class = ImageResources
 
@@ -35,3 +46,12 @@ class VideoResource(resources.ModelResource):
 @admin.register(Video)
 class VideoAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ['title', 'url_video', 'youtube_id']
+
+    def get_export_formats(self):
+        formats = (
+             base_formats.HTML,
+             base_formats.XLS,
+             base_formats.XLSX,
+        )
+
+        return [f for f in formats if f().can_export()]

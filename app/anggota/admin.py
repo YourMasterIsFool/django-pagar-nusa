@@ -13,6 +13,9 @@ from import_export import resources
 
 
 from anggota.models import TINGKAT
+
+from import_export.formats import base_formats
+
 # Register your models here.
 
 
@@ -80,6 +83,15 @@ class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
                    'jabatan', 'status',  'tingkat', 'verifikasi']
     inlines = [CertificateAdmin]
     form = AnggotaForm
+
+    def get_export_formats(self):
+        formats = (
+             base_formats.HTML,
+             base_formats.XLS,
+             base_formats.XLSX,
+        )
+
+        return [f for f in formats if f().can_export()]
 
     def get_verifikasi(self, obj):
 
@@ -197,6 +209,15 @@ class UKTAdmin(ExportMixin, admin.ModelAdmin):
                    'unit_latihan', 'tingkat', 'hasil', 'tanggal_ujian'
                    ]
 
+    def get_export_formats(self):
+        formats = (
+             base_formats.HTML,
+             base_formats.XLS,
+             base_formats.XLSX,
+        )
+
+        return [f for f in formats if f().can_export()]
+                       
     def photo(self, obj):
         return format_html(f'<img src="{obj.anggota.profile_pic.url}" width="100" height="100">')
 

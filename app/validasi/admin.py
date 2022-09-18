@@ -4,6 +4,9 @@ from anggota.models import Anggota
 
 from django.utils.translation import gettext as _
 from django.utils.html import format_html
+from import_export.formats import base_formats
+
+
 class AnggotaBase(admin.ModelAdmin):
 	pass
 
@@ -17,6 +20,14 @@ class AnggotaValidasi(Anggota):
 
 class AnggotaValidasiAdmin(AnggotaBase):
 	list_display = ('nama','get_validation','get_photo_ktp');
+	 def get_export_formats(self):
+        formats = (
+             base_formats.HTML,
+             base_formats.XLS,
+             base_formats.XLSX,
+        )
+
+        return [f for f in formats if f().can_export()]
 
 	class Media: 
 

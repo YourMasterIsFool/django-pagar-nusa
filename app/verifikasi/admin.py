@@ -4,6 +4,8 @@ from anggota.models import Anggota
 from django.utils.translation import gettext as _
 from django.utils.html import format_html
 
+from import_export.formats import base_formats
+
 
 class VerifikasiAnggota(Anggota):
     class Meta:
@@ -15,6 +17,15 @@ class VerifikasiAnggota(Anggota):
 class VerikasiAnggotaAdmin(admin.ModelAdmin):
     list_display = ('nama', 'get_verifikasi', 'get_photo_ktp')
     exclude = ('status_verify', 'validate', 'author')
+
+    def get_export_formats(self):
+        formats = (
+             base_formats.HTML,
+             base_formats.XLS,
+             base_formats.XLSX,
+        )
+
+        return [f for f in formats if f().can_export()]
 
     def get_verifikasi(self, obj):
 

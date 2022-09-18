@@ -5,6 +5,8 @@ from import_export.admin import ImportExportModelAdmin, ExportMixin
 # Register your models here.
 from import_export import resources
 
+from import_export.formats import base_formats
+
 
 class JadwalResource(resources.ModelResource):
 
@@ -24,6 +26,15 @@ class JadwalResource(resources.ModelResource):
 class JadwalAdmin(ExportMixin, admin.ModelAdmin):
     list_filter = ('title', 'start', 'end', 'tempat')
     resource_class = JadwalResource
+
+    def get_export_formats(self):
+        formats = (
+             base_formats.HTML,
+             base_formats.XLS,
+             base_formats.XLSX,
+        )
+
+        return [f for f in formats if f().can_export()]
 
 
 admin.site.register(Jadwal, JadwalAdmin)
