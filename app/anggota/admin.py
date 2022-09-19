@@ -7,7 +7,7 @@ from anggota.models import CertificateImage
 from django.utils.html import format_html
 # Register your models here.
 from django import forms
-
+from django.http import HttpRequest
 from import_export.admin import ExportMixin, ImportExportModelAdmin
 from import_export import resources
 
@@ -68,20 +68,58 @@ class AnggotaResource(resources.ModelResource):
                   'jabatan', 'status',  'tingkat', 'get_verifikasi']
 
 
-class CertificateAdmin(admin.StackedInline):
+class CertificateAdmin(admin.TabularInline):
     model = CertificateImage
     exclude = ('tingkat',)
+    can_delete = False
+    extra = 1
 
+    def has_view_or_change_permission(self, request, obj=None) -> bool:
+
+        if(request.user.is_superuser  or  request.user.is_staff):
+            return True
+        return super().has_view_or_change_permission(request, obj)
+    
+    def has_add_permission(self, request, obj: None) -> bool:
+        if(request.user.is_superuser  or  request.user.is_staff):
+            return True
+        return super().has_add_permission(request, obj)
+
+    def has_delete_permission(self, request, obj=None) -> bool:
+        return False
+    
 
 class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ['avatar', 'nama', 'alamat', 'no_hp',
                     'jabatan', 'status',  'tingkat', 'get_verifikasi', 'active_status', 'get_nomor_anggota']
+    
     exclude = ('validate', 'status_verify',
                'author', 'verifikasi', 'sertifikat')
 
     list_filter = ['nama', 'alamat', 'no_hp',
                    'jabatan', 'status',  'tingkat', 'verifikasi']
+
     inlines = [CertificateAdmin]
+
+    
+    
+    def get_inline_instances(self, request, obj=None):
+        print('request', request.user.is_staff)
+        inline_instances = []
+        for inline_class in self.get_inlines(request, obj):
+            inline = inline_class(self.model, self.admin_site)
+            if request:
+                if not (inline.has_view_or_change_permission(request, obj) or
+                        inline.has_add_permission(request, obj) or                            # AT THIS LINE
+                        inline.has_delete_permission(request, obj)):
+                    continue
+                if not inline.has_add_permission(request, obj):
+                    inline.max_num = 0
+            inline_instances.append(inline)
+
+        return inline_instances
+   
+
     form = AnggotaForm
 
     def get_export_formats(self):
@@ -201,13 +239,15 @@ class UKTResources(resources.ModelResource):
 
 
 class UKTAdmin(ExportMixin, admin.ModelAdmin):
-    list_display = ['photo', 'nama', 'alamat',
+    list_display = ['photo',  'alamat',
                     'unit_latihan', 'tingkat', 'hasil', 'tanggal_ujian'
                     ]
 
     list_filter = ['anggota__nama', 'anggota__alamat',
                    'unit_latihan', 'tingkat', 'hasil', 'tanggal_ujian'
                    ]
+
+
 
     def get_export_formats(self):
         formats = (

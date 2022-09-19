@@ -1,4 +1,3 @@
-from django.contrib import admin
 import re
 from functools import update_wrapper
 from weakref import WeakSet
@@ -23,9 +22,13 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.common import no_append_slash
 from django.views.decorators.csrf import csrf_protect
 from django.views.i18n import JavaScriptCatalog
-
+from django.contrib import admin
 
 class MyAdminSite(admin.AdminSite):
+
+     def has_change_permission(self, request, obj=None):
+        return obj.is_staff
+
      def _build_app_dict(self, request, label=None):
         """
         Build the app dictionary. The optional `label` parameter filters models
