@@ -173,7 +173,8 @@ class UjianKenaikanTingkat(models.Model):
 class CertificateImage(models.Model):
     image = models.ImageField(
         upload_to="certificate_image/", blank=True, null=True)
-
+    keterangan_tingkat = models.TextField(null=True, blank=True)
+    tanggal_naik_tingkat = models.DateField(null=False)
     tingkat = models.CharField(max_length=100, null=True)
     anggota = models.ForeignKey(
         Anggota, related_name='certificate_image', on_delete=models.CASCADE)

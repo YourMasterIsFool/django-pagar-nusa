@@ -90,8 +90,8 @@ class CertificateAdmin(admin.TabularInline):
     
 
 class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
-    list_display = ['avatar', 'nama', 'alamat', 'no_hp',
-                    'jabatan', 'status',  'tingkat', 'get_verifikasi', 'active_status', 'get_nomor_anggota']
+    list_display = ['avatar', 'get_nomor_anggota', 'nama', 'alamat', 'no_hp',
+                    'jabatan', 'status',  'tingkat', 'get_verifikasi', 'get_active_status']
     
     exclude = ('validate', 'status_verify',
                'author', 'verifikasi', 'sertifikat')
@@ -147,6 +147,24 @@ class AnggotaAdmin(ExportMixin, admin.ModelAdmin):
          """)
 
     get_verifikasi.short_description = 'Verifikasi Anggota'
+
+
+    def get_active_status(self, obj):
+
+        if (obj.active_status):
+            return format_html("""
+                <span style='padding: 10px 16px; background-color:green; border-radius: 20px; color: white; font-size:12px'>
+                    Aktif
+                </span>
+            """)
+
+        return format_html("""
+            <span style='padding: 10px 16px; background-color:red; border-radius: 20px; color: white; font-size:12px'>
+                    Tidak Aktif
+                </span>
+         """)
+
+    get_active_status.short_description = 'Status Aktif'
 
     def get_nomor_anggota(self, obj):
         return format(f"""
