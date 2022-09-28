@@ -82,7 +82,7 @@ class Anggota(models.Model):
     jabatan = models.CharField(max_length=100, default="~", blank=True)
     cabang = models.CharField(_("Cabang"), max_length=100)
     pac = models.CharField(_("PAC"), max_length=100, choices=PAC)
-    ranting = models.CharField(_("Ranting"), choices=RANTING, max_length=100)
+    # ranting = models.CharField(_("Ranting"), choices=RANTING, max_length=100, null=True)
     sertifikat = models.FileField(
         upload_to='sertifikat/', blank=True, null=True)
     validate = models.BooleanField(_("Validasi"), default=False)
