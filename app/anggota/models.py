@@ -55,7 +55,22 @@ PAC = [
     ('Singojuruh', 'Singojuruh'),
     ('Kalibaru', 'Kalibaru'),
     ('genteng', 'genteng'),
-    ('songgon', 'songgon')
+    ('songgon', 'songgon'),
+    ('pesanggaran', 'pesanggaran'),
+    ('bangorejo', 'bangorejo'),
+    ('tegaldlimo', 'tegaldlimo'),
+    ('glenmore', 'glenmore'),
+    ('kabat', 'kabat'),
+    ('glagah', 'glagah'),
+    ('banyuwangi', 'banyuwangi'),
+    ('giri', 'giri'),
+    ('wongsorejo', 'wongsorejo'),
+    ('sempu', 'sempu'),
+    ('kalipuro', 'kalipuro'),
+    ('siliragung', 'siliragung'),
+    ('tegalsari', 'tegalsari'),
+    ('licin', 'licin'),
+    ('blimbingsari', 'blimbingsari')
 ]
 
 
